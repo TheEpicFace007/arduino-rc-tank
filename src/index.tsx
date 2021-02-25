@@ -4,6 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import MainMenu from "./Routes/main-menu/MainMenu";
 import { BrowserRouter, Route, Switch, } from 'react-router-dom';
 import { UnknownPage as NotFound } from "./Routes/404/404";
+import { Settings } from "./Routes/Settings/Settings";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,6 +13,9 @@ ReactDOM.render(
         <Switch>
           <Route path="/" component={MainMenu} exact>
             <MainMenu />
+          </Route>
+          <Route path="/reglage" exact>
+            <Settings />
           </Route>
           <Route path="*" component={NotFound} />
         </Switch>
