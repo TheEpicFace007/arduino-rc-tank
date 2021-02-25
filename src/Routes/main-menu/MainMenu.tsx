@@ -1,13 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
+import { MenuButton, MainMenuButtonState } from "../../Components/Menu/MenuButton";
+import { Menu } from "../../Components/Menu/Menu"
+import "./MainMenu.scss"
 
-function MainMenu()
+export default function MainMenu()
 {
   return (
     <>
-    
+      <Menu />
     </>
   );
 }
-
-export default MainMenu;

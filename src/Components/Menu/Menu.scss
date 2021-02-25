@@ -1,0 +1,41 @@
+@import "../../colors.scss";
+@import "~roboto-sass/scss/roboto";
+
+.dimmed {
+  .menu {
+    background-color: #222;
+    color: white;
+    display: flex;
+
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .menu-btn {
+      // appearance
+      background-color: #333;
+      // size
+      $size: 256px - 80px;
+      min-width: $size;
+      min-height: $size;
+      // text
+      text-transform: uppercase;
+      font-family: "Roboto";
+      text-align: center;
+      font-size: 24px;
+
+      // childs
+      .MuiSvgIcon-root {
+        font-size: 52px;
+        margin-top: 20px;
+      }
+      .menu-btn .MuiSvgIcon-roo {
+        color: rgb(232, 238, 243);
+      }
+    }
+
+    .btn-selected {
+      opacity: 60%;
+    }
+  }
+}

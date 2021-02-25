@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import MainMenu from "./Routes/main-menu/MainMenu";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -10,7 +9,7 @@ ReactDOM.render(
     <main>
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={MainMenu} />
+          <Route path="/" component={MainMenu} sensitive={false}/>
         </Switch>
       </BrowserRouter>
     </main>
