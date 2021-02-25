@@ -1,6 +1,6 @@
 @import "../../colors.scss";
 @import "~roboto-sass/scss/roboto";
-@import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap");
 
 .dimmed {
   .menu {
@@ -20,8 +20,8 @@
       background-color: #333;
       // size
       $size: 256px - 80px;
-      min-width: $size;
-      min-height: $size;
+      width: 206.16px;
+      height: 206.16px;
       // text
       text-transform: uppercase;
       font-family: "Roboto";
@@ -35,6 +35,14 @@
       }
       .menu-btn .MuiSvgIcon-roo {
         color: rgb(232, 238, 243);
+      }
+
+      svg {
+        margin: 15px;
+      }
+
+      h3 {
+        // height: 150px;
       }
     }
 

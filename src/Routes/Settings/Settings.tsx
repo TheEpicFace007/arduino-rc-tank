@@ -14,6 +14,8 @@ library.add(faHome, faArrowCircleLeft, faWrench);
 
 export function Settings()
 {
+  document.title = "Réglages"
+
   const [activeSettingPage, setActiveSettingPage] = useState<SettingPage>("home");
   const [previousActiveSettingPage, setPreviousSettingPage] = useState<SettingPage>("home");
 
