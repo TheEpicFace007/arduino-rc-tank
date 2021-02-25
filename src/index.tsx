@@ -35,6 +35,7 @@ document.onloadedmetadata = () =>
       break;
     default:
       document.title = "404 - Page inconnue";
+      break;
   }
 };
 
