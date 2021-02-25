@@ -6,7 +6,7 @@ export function UnknownPage()
   return (
     <>
       <h1>Page inconnu</h1>
-      <p><a href="/">Retuourné au menu principal?</a></p>
+      <p><a href="/">Clique ici pour retourné au menu principale</a></p>
     </>
   );
 }

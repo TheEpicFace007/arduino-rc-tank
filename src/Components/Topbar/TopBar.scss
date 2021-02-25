@@ -1,0 +1,48 @@
+.top-bar {
+  // colors
+  background-color: #212121;
+  color: white;
+  // position and size
+  width: 100vw;
+  height: 80px + 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+
+  // grid
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: center;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, 80px);
+  // border-top: 10px #212121 solid;
+
+  .top-bar-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 80px;
+
+    p {
+      margin: 3px 0;
+    }
+
+    svg {
+      margin: 6px;
+    }
+  }
+
+  .top-bar-btn.left {
+    justify-self: start;
+  }
+
+  .top-bar-btn.right {
+    justify-self: end;
+  }
+
+  .top-bar-btn.middle {
+    justify-self: center;
+  }
+}
