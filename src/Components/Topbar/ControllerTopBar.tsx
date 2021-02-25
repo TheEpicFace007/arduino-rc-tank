@@ -6,7 +6,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowCircleDown, faArrowCircleLeft, faHome } from "@fortawesome/free-solid-svg-icons";
 
-type ControllerTopBarItem = {
+export type ControllerTopBarItem = {
   name: string,
   icon: IconProp,
   onClick: () => void;

@@ -12,10 +12,7 @@ export interface TopBarProp
 export function TopBar(props: TopBarProp)
 {
   const screenSize = getScreenOrientation();
-  if (props.children.length < 3)
-  {
-
-  }
+ 
   return (
     <div className="top-bar">
       {props.children}
