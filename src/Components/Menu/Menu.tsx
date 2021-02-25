@@ -5,6 +5,11 @@ import
   {
     TuneTwoTone, LocalTaxiTwoTone, HomeTwoTone
   } from "@material-ui/icons";
+import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
+import { library,  } from '@fortawesome/fontawesome-svg-core';
+import { faCar, faHome, faTools } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faCar, faHome, faTools);
 
 export type MenuState =
   [
@@ -19,9 +24,9 @@ export function Menu()
 {
   const MAIN_MENU_BUTTON: MenuState =
     [
-      { name: "Acceuil", isSelected: false, icon: <HomeTwoTone /> },
-      { name: "Conduire", isSelected: false, icon: <LocalTaxiTwoTone /> },
-      { name: "Réglage", isSelected: false, icon: <TuneTwoTone /> }
+      { name: "Acceuil", isSelected: false, icon: <FontAwesomeIcon icon="home" size="4x" /> },
+      { name: "Conduire", isSelected: false, icon: <FontAwesomeIcon icon="car" size="4x" /> },
+      { name: "Réglage", isSelected: false, icon: <FontAwesomeIcon icon="tools" size="4x" /> }
     ];
   switch (document.location.pathname) {
     case "/":
@@ -49,9 +54,9 @@ export function Menu()
         document.location.pathname = "/drive";
         break;
       case "Réglage":
-        if (document.location.pathname == "/setting")
+        if (document.location.pathname == "/reglage")
           break;
-        document.location.pathname = "/setting";
+        document.location.pathname = "/reglage";
         break;
     }
   }
