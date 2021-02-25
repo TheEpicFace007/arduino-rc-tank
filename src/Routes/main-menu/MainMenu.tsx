@@ -5,6 +5,7 @@ import "./MainMenu.scss"
 
 export default function MainMenu()
 {
+  document.title = "Menu principale";
   return (
     <>
       <Menu />

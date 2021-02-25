@@ -10,7 +10,9 @@ ReactDOM.render(
     <>
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={MainMenu} exact/>
+          <Route path="/" component={MainMenu} exact>
+            <MainMenu />
+          </Route>
           <Route path="*" component={NotFound}/>
         </Switch>
       </BrowserRouter>

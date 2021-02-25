@@ -1,7 +1,30 @@
+@import "../../../node_modules/roboto-sass/scss/roboto.scss";
+
 body {
-  // pos
+  background-color: #3e3e3e;
+  color: darken(whitesmoke, 3%);
+
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+h1,
+p,
+a {
+  font-family: "Roboto";
+  text-align: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 28px;
+  margin-top: 36vh;
+}
+
+a {
+  color: lighten(rgb(58, 122, 219), 5%);
+  font-size: 18px;
 }
