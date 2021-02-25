@@ -51,7 +51,7 @@ export function Settings()
     case "power-setting":
       toRender = (
         <SettingPage name="Puissences des moteurs" key="puissences-des-moteurs">
-          <SettingSlider default={0} min={0} max={10} label="Puissences des moteurs" onValueChange={onPowerChange}/>
+          <SettingSlider default={0} min={0} max={100} step="5" unit="%" label="Puissences des moteurs" onValueChange={onPowerChange} />
         </SettingPage>
       );
       break;
@@ -61,9 +61,7 @@ export function Settings()
     <>
       <header>
         <TopBar>
-          {SettingTopBarItem.map((setting) =>
-            <TopBarButton key={setting.name} onClick={setting.onClick}
-              name={setting.name} icon={setting.icon} />)}
+          {SettingTopBarItem.map((setting) => <TopBarButton key={setting.name} onClick={setting.onClick} name={setting.name} icon={setting.icon} />)}
         </TopBar>
       </header>
 
@@ -75,6 +73,14 @@ export function Settings()
 
   function onPowerChange(power: number)
   {
-    console.log(power)
+    console.log(power);
+  }
+
+  function onLeftEngineChange(change: number)
+  {}
+
+  function onRightEngineChange(change: number)
+  {
+
   }
 }

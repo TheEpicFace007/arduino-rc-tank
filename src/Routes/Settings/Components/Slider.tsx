@@ -7,7 +7,7 @@ export interface SettingSliderProps
   min: number | string;
   max: number | string;
   default: number | string;
-  step?: number;
+  step?: number | string;
 
   label: string;
   unit?: string;
@@ -17,14 +17,13 @@ export interface SettingSliderProps
 export function SettingSlider(props: SettingSliderProps)
 {
   const [value, setValue] = React.useState(props.default);
-  const sliderId = nanoid();
   
   return (
     <div className="setting-component-group">
-      <p>{props.label}</p>
-      <input type="range" defaultValue={props.default} id={sliderId} min={props.min} max={props.max} 
+      <p className="label">{props.label}</p>
+      <input type="range" defaultValue={props.default} min={props.min} max={props.max} 
       onInput={onInputChange} step={props.step ?? ""}/>
-      <p>{`${value}${" " + (props.unit ?? "")}`}</p>
+      <p className="unit">{`${value}${" " + (props.unit ?? "")}`}</p>
     </div>
   );
 
