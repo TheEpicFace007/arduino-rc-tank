@@ -2,11 +2,11 @@ import React from "react";
 import "./Menu.scss";
 import { MenuButton, MainMenuButtonState } from "./MenuButton";
 import
-  {
-    TuneTwoTone, LocalTaxiTwoTone, HomeTwoTone
-  } from "@material-ui/icons";
-import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
-import { library,  } from '@fortawesome/fontawesome-svg-core';
+{
+  TuneTwoTone, LocalTaxiTwoTone, HomeTwoTone
+} from "@material-ui/icons";
+import { FontAwesomeIcon, } from "@fortawesome/react-fontawesome";
+import { library, } from '@fortawesome/fontawesome-svg-core';
 import { faCar, faHome, faTools } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faCar, faHome, faTools);
@@ -18,7 +18,7 @@ export type MenuState =
     { name: "Réglage", isSelected: boolean; icon: JSX.Element; }
   ];
 
-export type button_title =  "Acceuil" | "Conduire" | "Réglage";
+export type button_title = "Acceuil" | "Conduire" | "Réglage";
 
 export function Menu()
 {
@@ -62,12 +62,14 @@ export function Menu()
   }
 
   return (
-    <div className="dimmed">
-      <div className="menu">
-        {/* @ts-ignore*/}
-        {MAIN_MENU_BUTTON.map((state) => <MenuButton name={state.name} onClick={(b) => onButtonClick(b)}
-          isSelected={state.isSelected} icon={state.icon} key={state.name} />)}
-      </div>
-    </div>
+    <>
+        <div className="dimmed">
+          <div className="menu">
+            {/* @ts-ignore*/}
+            {MAIN_MENU_BUTTON.map((state) => <MenuButton name={state.name} onClick={(b) => onButtonClick(b)}
+              isSelected={state.isSelected} icon={state.icon} key={state.name} />)}
+          </div>
+        </div>
+    </>
   );
 }
