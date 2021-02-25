@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './Routes/App';
 import reportWebVitals from './reportWebVitals';
+import MainMenu from "./Routes/main-menu/MainMenu";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
+    <main>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" component={MainMenu} />
+        </Switch>
+      </BrowserRouter>
+    </main>
   </React.StrictMode>,
   document.getElementById('root')
 );
