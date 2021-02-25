@@ -8,16 +8,18 @@ import
 
 export type MenuState =
   [
-    { name: "Home", isSelected: boolean; icon: JSX.Element; },
+    { name: "Acceuil", isSelected: boolean; icon: JSX.Element; },
     { name: "Conduire", isSelected: boolean; icon: JSX.Element; },
     { name: "Réglage", isSelected: boolean; icon: JSX.Element; }
   ];
+
+export type button_title =  "Acceuil" | "Conduire" | "Réglage";
 
 export function Menu()
 {
   const MAIN_MENU_BUTTON: MenuState =
     [
-      { name: "Home", isSelected: false, icon: <HomeTwoTone /> },
+      { name: "Acceuil", isSelected: false, icon: <HomeTwoTone /> },
       { name: "Conduire", isSelected: false, icon: <LocalTaxiTwoTone /> },
       { name: "Réglage", isSelected: false, icon: <TuneTwoTone /> }
     ];
@@ -33,21 +35,21 @@ export function Menu()
       break;
   }
 
-  function onButtonClick(button: string): void
+  function onButtonClick(button: button_title & string): void
   {
     switch (button) {
-      case "Home":
-        if (document.location.pathname == button)
+      case "Acceuil":
+        if (document.location.pathname == "/")
           break;
         document.location.pathname = "/";
         break;
       case "Conduire":
-        if (document.location.pathname == button)
+        if (document.location.pathname == "/drive")
           break;
         document.location.pathname = "/drive";
         break;
       case "Réglage":
-        if (document.location.pathname == button)
+        if (document.location.pathname == "/setting")
           break;
         document.location.pathname = "/setting";
         break;
@@ -57,7 +59,8 @@ export function Menu()
   return (
     <div className="dimmed">
       <div className="menu">
-        {MAIN_MENU_BUTTON.map((state) => <MenuButton name={state.name} onClick={onButtonClick}
+        {/* @ts-ignore*/}
+        {MAIN_MENU_BUTTON.map((state) => <MenuButton name={state.name} onClick={(b) => onButtonClick(b)}
           isSelected={state.isSelected} icon={state.icon} key={state.name} />)}
       </div>
     </div>
