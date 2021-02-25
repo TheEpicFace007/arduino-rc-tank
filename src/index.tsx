@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import MainMenu from "./Routes/main-menu/MainMenu";
-import { BrowserRouter, Route, Switch,  } from 'react-router-dom';
-import {UnknownPage as NotFound} from "./Routes/404/404";
+import { BrowserRouter, Route, Switch, } from 'react-router-dom';
+import { UnknownPage as NotFound } from "./Routes/404/404";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,7 +13,7 @@ ReactDOM.render(
           <Route path="/" component={MainMenu} exact>
             <MainMenu />
           </Route>
-          <Route path="*" component={NotFound}/>
+          <Route path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>
     </>
@@ -21,16 +21,22 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-document.onload = () =>
+document.onloadedmetadata = () =>
 {
-  switch (document.location.pathname)
-  {
+  switch (document.location.pathname) {
     case "/":
-    case "/drive":
+      document.title = "Menu principale";
       break;
-    // case ""
+    case "/drive":
+      document.title = "Manette";
+      break;
+    case "/reglage":
+      document.title = "Réglage";
+      break;
+    default:
+      document.title = "404 - Page inconnue";
   }
-}
+};
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
