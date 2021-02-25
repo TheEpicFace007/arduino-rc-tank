@@ -15,8 +15,8 @@ export interface TopBarButtonProps
 export function TopBarButton(props: TopBarButtonProps)
 {
   return (
-    <div className={`top-bar-btn`}>
-      <FontAwesomeIcon icon={props.icon} color="white" size="2x" onClick={props.onClick}/>
+    <div className={`top-bar-btn`} onClick={props.onClick}>
+      <FontAwesomeIcon icon={props.icon} color="white" size="2x" />
       <p>{props.name}</p>
     </div>
   );

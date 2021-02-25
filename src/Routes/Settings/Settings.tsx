@@ -6,6 +6,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowCircleLeft, faHome, faWrench } from "@fortawesome/free-solid-svg-icons";
 import { TopBarButton } from "../../Components/Topbar/TopBarButton";
 import { compilation } from "webpack";
+import { SettingSlider } from "./Components/Slider";
+import { SettingPage } from "./Components/SettingPage";
 
 type SettingPage = "power-setting" | "home";
 library.add(faHome, faArrowCircleLeft, faWrench);
@@ -19,33 +21,38 @@ export function Settings()
     {
       name: "Retour", icon: "arrow-circle-left", onClick: () =>
       {
-        setPreviousSettingPage(activeSettingPage);
-        setActiveSettingPage(previousActiveSettingPage);
+        if (activeSettingPage != "home") {
+          setPreviousSettingPage(activeSettingPage);
+          setActiveSettingPage(previousActiveSettingPage);
+        }
       }
     },
     {
       name: "Puissance du moteur", icon: "wrench", onClick: () => 
       {
-        setPreviousSettingPage(activeSettingPage);
-        setActiveSettingPage("power-setting");
+        if (activeSettingPage != "power-setting") {
+          setPreviousSettingPage(activeSettingPage);
+          setActiveSettingPage("power-setting");
+        }
       }
     }
   ];
 
   let toRender: JSX.Element;
+
   switch (activeSettingPage) {
     case "home":
       toRender = (
         <div className="setting-page-intro">
-          <p style={{fontSize: "30px"}}>Selectionne une des catégorie de paramèttres.</p>
+          <h2 style={{ fontSize: "29x" }}>Selectionne une des catégorie de paramèttres.</h2>
         </div>
       );
       break;
     case "power-setting":
       toRender = (
-        <div className="power-setting setting-page">
-          
-        </div>
+        <SettingPage name="Puissences des moteurs" key="puissences-des-moteurs">
+          <SettingSlider default={0} min={0} max={10} label="Puissences des moteurs" onValueChange={onPowerChange}/>
+        </SettingPage>
       );
       break;
   }
@@ -65,4 +72,9 @@ export function Settings()
       </main>
     </>
   );
+
+  function onPowerChange(power: number)
+  {
+    console.log(power)
+  }
 }

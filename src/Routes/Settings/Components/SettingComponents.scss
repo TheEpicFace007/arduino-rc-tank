@@ -1,0 +1,53 @@
+@import "../../../../node_modules/roboto-sass/scss/roboto.scss";
+
+.setting-page-intro {
+  h2 {
+    font-family: "Roboto";
+
+    font-weight: 500;
+  }
+}
+
+.setting-page {
+  font-family: "Roboto";
+  // position and size
+  width: 80vw;
+  margin-top: 20px;
+  z-index: 5;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: center;
+  align-content: flex-start;
+  overflow-y: auto;
+  height: 65vh;
+
+  // color
+  background-color: #222;
+
+  h2 {
+    margin: 2px 10px;
+    border-bottom: solid 1px #ccc;
+  }
+
+  .setting-component-group {
+    place-self: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin: 6px;
+    height: 30px;
+
+    input {
+      width: 160px;
+      margin: 0 6px;
+    }
+
+    p {
+      padding: 0 5px;
+      margin: 0;
+    }
+  }
+}
