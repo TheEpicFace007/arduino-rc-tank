@@ -1,6 +1,6 @@
 import { TabProps } from "@material-ui/core";
 import React from "react";
-import { getScreenOrientation, ScreenOrientation } from "../../ScreenApi";
+import { getScreenOrientation, ScreenOrientation } from "../../Utils/ScreenApi";
 import BlankTopBarItem from "./BlankTopBarItem";
 import "./TopBar.scss"
 import { TopBarButton } from "./TopBarButton";
