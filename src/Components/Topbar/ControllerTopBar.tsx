@@ -22,8 +22,8 @@ export function ControllerTopBar()
 {
   const CONTROLLER_TOP_BAR_ITEMS: ControllerTopBarItem[] =
     [
-      { name: "Retour", icon: "arrow-circle-left", onClick: () => window.history.back() },
-      { name: "Menu principale", icon: "home", onClick: () => window.location.pathname = "/" }
+      // { name: "Retour", icon: "arrow-circle-left", onClick: () => window.history.back() },
+      // { name: "Menu principale", icon: "home", onClick: () => window.location.pathname = "/" }
     ];
 
   return (

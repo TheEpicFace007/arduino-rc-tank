@@ -5,18 +5,26 @@ import MainMenu from "./Routes/main-menu/MainMenu";
 import { BrowserRouter, Route, Switch, } from 'react-router-dom';
 import { UnknownPage as NotFound } from "./Routes/404/404";
 import { Settings } from "./Routes/Settings/Settings";
+import { Drive } from "./Routes/Drive/Drive";
 
 ReactDOM.render(
   <React.StrictMode>
     <>
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={MainMenu} exact>
+
+          <Route path="/" exact>
             <MainMenu />
           </Route>
+
           <Route path="/reglage" exact>
             <Settings />
           </Route>
+
+          <Route path="/drive" exact>
+            <Drive />
+          </Route>
+
           <Route path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>

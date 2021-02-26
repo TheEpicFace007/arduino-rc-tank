@@ -20,7 +20,6 @@
   align-items: flex-start;
   align-content: center;
   align-content: flex-start;
-  overflow-y: auto;
   height: 65vh;
 
   // color
@@ -158,12 +157,13 @@
       $size: 36px;
       height: $size;
       text-align: center;
-      transition: box-shadow 100ms ease-out;
+      transition: background-color 150ms linear;
     }
 
     input[type="button"]:active {
       border-radius: 3px;
-      transition: box-shadow 100ms ease-out;
+      transition: background-color 150ms linear;
+      background-color: #eee;
     }
     /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
 how to remove the virtical space around the range input in IE*/
