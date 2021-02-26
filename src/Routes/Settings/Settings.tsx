@@ -8,6 +8,7 @@ import { TopBarButton } from "../../Components/Topbar/TopBarButton";
 import { compilation } from "webpack";
 import { SettingSlider } from "./Components/Slider";
 import { SettingPage } from "./Components/SettingPage";
+import { SettingButtons } from "./Components/Buttons";
 
 type SettingPage = "power-setting" | "home";
 library.add(faHome, faArrowCircleLeft, faWrench);
@@ -54,6 +55,7 @@ export function Settings()
       toRender = (
         <SettingPage name="Puissences des moteurs" key="puissences-des-moteurs">
           <SettingSlider default={0} min={0} max={100} step="5" unit="%" label="Puissences des moteurs" onValueChange={onPowerChange} />
+          <SettingButtons name="Appliqué les changements" onClick={() => onSaveEngineSettings} />
         </SettingPage>
       );
       break;
@@ -82,6 +84,11 @@ export function Settings()
   {}
 
   function onRightEngineChange(change: number)
+  {
+
+  }
+
+  function onSaveEngineSettings(): void
   {
 
   }

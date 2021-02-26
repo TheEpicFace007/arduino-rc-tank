@@ -40,7 +40,7 @@
     margin: 6px;
     height: 30px;
 
-    input {
+    input[type="slider"] {
       width: 160px;
       margin: 0 6px;
     }
@@ -50,7 +50,7 @@
       width: 300px;
       // height: 100px;
     }
-    
+
     p.unit {
       width: 100px;
     }
@@ -135,6 +135,35 @@
     }
     input[type="range"]:focus::-ms-fill-upper {
       background: #dadada;
+    }
+
+    input[type="button"] {
+      border: 0;
+      border-radius: 0.25rem;
+      font-family: Roboto, sans-serif;
+      font-size: 1rem;
+      line-height: 1.2;
+      white-space: nowrap;
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      margin: 0.25rem;
+      cursor: pointer;
+      outline: none;
+
+      height: 28px;
+      color: #000;
+      background-color: #ccc;
+      // border: #eee solid 3px;
+
+      $size: 36px;
+      height: $size;
+      text-align: center;
+      transition: box-shadow 100ms ease-out;
+    }
+
+    input[type="button"]:active {
+      border-radius: 3px;
+      transition: box-shadow 100ms ease-out;
     }
     /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
 how to remove the virtical space around the range input in IE*/
