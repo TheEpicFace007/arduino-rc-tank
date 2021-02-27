@@ -52,12 +52,13 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.7",
-    "node-sass": "^5.0.0",
+    "@craco/craco": "^6.1.1",
     "@types/jest": "^26.0.20",
     "@types/node": "^12.20.1",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
-    "@craco/craco": "^6.1.1"
+    "@types/react-router-dom": "^5.1.7",
+    "closure-webpack-plugin": "^2.5.0",
+    "node-sass": "^5.0.0"
   }
 }
