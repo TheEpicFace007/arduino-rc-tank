@@ -1,6 +1,4 @@
-.joystick-place {
-  .joy-x, .joy-x {
-    width: 45vw;
-    height: 45vh;
-  }
+main {
+  display: grid;
+  grid-auto-flow: row;
 }

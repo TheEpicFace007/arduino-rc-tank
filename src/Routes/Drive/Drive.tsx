@@ -1,58 +1,49 @@
-import React from "react";
+import React, { useRef } from "react";
 import { ControllerTopBar } from "../../Components/Topbar/ControllerTopBar";
 // import ReactNipple from "react-nipple";
 import Nipple from "nipplejs";
 import "./Drive.scss";
 import { syncTimeout } from "../../Utils/SyncTimeout";
+import { Joystick, JoystickMovedEventArgs } from "../../Components/Control/Joystick";
+import NippleJs from "nipplejs";
 
 
 export function Drive()
 {
   // wait for the page to load before mounting joystick x
-  setTimeout(async () =>
-  {
-    while (document.getElementById("joy-x") === null)
-      await syncTimeout(100);
-    console.log("found joy x");
-    const zone = document.getElementById("joy-x");
-    if (zone) {
-      const joystickX = Nipple.create({
-        lockX: true,
-        zone: zone as HTMLElement,
-        dynamicPage: true,
-        fadeTime: 200,
-        // mode: "dynamic"
-      });
-    }
-  }, 0);
-
-  setTimeout(async () =>
-  {
-    while (document.getElementById("joy-y") === null)
-      await syncTimeout(100);
-
-    const zone = document.getElementById("joy-y");
-    if (zone) {
-      const joystickX = Nipple.create({
-        lockX: true,
-        zone: zone as HTMLElement,
-        dynamicPage: true,
-        fadeTime: 200,
-        // mode: "dynamic"
-      });
-    }
-  }, 0);
-
-
   document.title = "Conduire";
+
+  const joyX = React.useRef<HTMLDivElement>(null);
+  if (joyX.current) {
+    const joyXInstance = NippleJs.create({
+      // catchDistance: true,
+      dynamicPage: true,
+      lockX: true,
+      zone: joyX.current
+    });
+    console.log("pog");
+  }
+  const joyY = React.useRef<HTMLDivElement>(null);
+  if (joyY.current) {
+    const joyYInstance = NippleJs.create({
+      // catchDistance: true,
+      dynamicPage: true,
+      lockY: true,
+      zone: joyY.current
+    });
+    console.log("pog");
+  }
+
   return (
     <>
-      <ControllerTopBar />
+      <header>
+        <ControllerTopBar />
+      </header>
 
-      <div className="joystick-place">
-        <div className="joy-x" />
-        <div className="joy-y" />
-      </div>
+      <main>
+        <div ref={joyX} />
+        <div ref={joyY} />
+      </main>
     </>
   );
 }

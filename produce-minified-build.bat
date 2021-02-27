@@ -1,0 +1,1 @@
+java -jar .\closure-compiler.jar --js \ .\build\static\js\2.12f7c6a3.chunk.js --js .\build\static\js\3.5a3a584b.chunk.js --js .\build\static\js\main.4ee477b3.chunk.js --js .\build\static\js\runtime-main.9b93a558.js --js_output_file output.js --compilation_level ADVANCED_OPTIMIZATIONS
