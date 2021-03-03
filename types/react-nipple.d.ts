@@ -367,15 +367,4 @@ export interface Joystick
  * A JavaScript library for creating vanillaJS virtual joysticks, for touch capable interfaces.
  */
 declare module 'nipplejs' {
-  /**
-   * Create a Joystick manager
-   * @param options for creating a manager instance
-   * @return manager instance
-   */
-  function create(options: JoystickManagerOptions): JoystickManager;
-
-  /**
-   * Library's root manger instance.
-   */
-  const factory: JoystickManager;
 }

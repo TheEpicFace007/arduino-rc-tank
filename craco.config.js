@@ -4,7 +4,7 @@ module.exports = {
   optimization: {
     minimizer: [
       new ClosurePlugin({
-        platform: "JAVA",
+        platform: ["java"],
         mode: "AGGRESSIVE_BUNDLE"
       })
     ]

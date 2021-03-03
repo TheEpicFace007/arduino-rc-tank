@@ -152,17 +152,20 @@
       height: 28px;
       color: #000;
       background-color: #ccc;
-      // border: #eee solid 3px;
+      // border: #bbab1e solid 3px;
 
       $size: 36px;
       height: $size;
       text-align: center;
-      transition: background-color 150ms linear;
+      transition: background-color 250ms linear;
+
+      // reset style for ios
+      -webkit-appearance: none;
     }
 
     input[type="button"]:active {
       border-radius: 3px;
-      transition: background-color 150ms linear;
+      transition: background-color 250ms linear;
       background-color: #eee;
     }
     /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out

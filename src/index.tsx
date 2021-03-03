@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch, } from 'react-router-dom';
 import { UnknownPage as NotFound } from "./Routes/404/404";
 import { Settings } from "./Routes/Settings/Settings";
 import { Drive } from "./Routes/Drive/Drive";
+import "./index.scss"
 
 ReactDOM.render(
   <React.StrictMode>

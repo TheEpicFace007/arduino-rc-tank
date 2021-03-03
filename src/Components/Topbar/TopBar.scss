@@ -4,9 +4,9 @@
   color: white;
   // position and size
   width: 100vw;
-  height: 80px + 10px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  height: 80px;
+  overflow-y: hidden;
+  overflow-x: auto;
 
 
   // grid
@@ -22,15 +22,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80px;
-    width: 80px;
+    // height: 80px;
+    // width: 80px;
 
     p {
       margin: 3px 0;
     }
 
     svg {
-      margin: 6px;
+      // margin: 6px 0;
+      margin-top: 3px;
     }
   }
 

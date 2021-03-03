@@ -41,7 +41,7 @@ export function Drive()
 
       <main>
         <div className={errorDivClass}>
-          <h1>Vous pouvez uniquement utilisé l'application en mode paysage</h1>
+          <h2>Vous pouvez uniquement utilisé l'application en mode paysage</h2>
         </div>
         <RpmGauge className={rpmGaugeClass ?? ""} />
       </main>

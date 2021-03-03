@@ -1,6 +1,4 @@
-import { fileURLToPath } from "url";
 import "./Menu.scss";
-import { nanoid } from "nanoid";
 
 export interface MainMenuButtonProps
 {

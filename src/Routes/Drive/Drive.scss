@@ -2,6 +2,11 @@ main {
   display: grid;
   grid-auto-flow: row;
 
+  h2 {
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+  }
+
   .hidden {
     display: none;
   }
