@@ -1,38 +1,37 @@
-import React, { useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { ControllerTopBar } from "../../Components/Topbar/ControllerTopBar";
 // import ReactNipple from "react-nipple";
-import Nipple from "nipplejs";
 import "./Drive.scss";
-import { syncTimeout } from "../../Utils/SyncTimeout";
-import { Joystick, JoystickMovedEventArgs } from "../../Components/Control/Joystick";
-import NippleJs from "nipplejs";
+import { RpmGauge } from "../../Components/RpmGauge/RpmGauge"
+import { getScreenOrientation } from "../../Utils/getOrientation";
 
 
 export function Drive()
 {
   // wait for the page to load before mounting joystick x
   document.title = "Conduire";
+  const [portraitModeError, setPortraitModeError] = useState(getScreenOrientation() == "landscape" ? false : true);
+  const [errorDivClass, setErrorDivClass] = useState("portrait-mode-error");
+  const [rpmGaugeClass, setRPMGaugeClass] = useState<string>();
 
-  const joyX = React.useRef<HTMLDivElement>(null);
-  if (joyX.current) {
-    const joyXInstance = NippleJs.create({
-      // catchDistance: true,
-      dynamicPage: true,
-      lockX: true,
-      zone: joyX.current
-    });
-    console.log("pog");
-  }
-  const joyY = React.useRef<HTMLDivElement>(null);
-  if (joyY.current) {
-    const joyYInstance = NippleJs.create({
-      // catchDistance: true,
-      dynamicPage: true,
-      lockY: true,
-      zone: joyY.current
-    });
-    console.log("pog");
-  }
+  window.onorientationchange = function()
+  {
+    const newState = getScreenOrientation() == "landscape" ? false : true;
+    setPortraitModeError(newState);
+  };
+
+  useEffect(() =>
+  {
+    if (portraitModeError) {
+      setErrorDivClass("portrait-mode-error");
+      setRPMGaugeClass("hidden");
+    }
+    else {
+      setErrorDivClass("portrait-mode-error" + " hidden");
+      setRPMGaugeClass("");
+    }
+  }, [portraitModeError])
+
 
   return (
     <>
@@ -41,8 +40,10 @@ export function Drive()
       </header>
 
       <main>
-        <div ref={joyX} />
-        <div ref={joyY} />
+        <div className={errorDivClass}>
+          <h1>Vous pouvez uniquement utilisé l'application en mode paysage</h1>
+        </div>
+        <RpmGauge className={rpmGaugeClass ?? ""} />
       </main>
     </>
   );
