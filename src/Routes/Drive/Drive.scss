@@ -4,6 +4,10 @@
   appearance: none;
 }
 
+body {
+  overflow: hidden;
+}
+
 main {
   display: grid;
   grid-auto-flow: row;
@@ -24,12 +28,9 @@ main {
     align-items: center;
     width: 95vw;
 
-    div {
-      width: 33vw !important;
-    }
-
     .steer-control,
     .power-control {
+      flex-basis: 30%;
       align-self: center;
       display: flex;
       justify-content: space-around;
@@ -53,12 +54,13 @@ main {
         }
       }
 
-      $anim-duration: 100ms;
+      $anim-duration: 6 0ms;
 
       button {
         $size: 64px;
         height: $size;
         width: $size;
+        font-size: 22px;
 
         background-color: #262626;
         color: #eee;
@@ -66,11 +68,17 @@ main {
         border-radius: 10px;
         outline: none;
 
+        margin: 0 12px;
+
         animation-name: onTouchAnimation;
         animation-duration: $anim-duration;
         animation-direction: normal;
         animation-timing-function: cubic-bezier(0.55, 0.09, 0.68, 0.53);
         animation-fill-mode: forwards;
+        ::selection {
+          opacity: none;
+        }
+        
         // box-shadow: -3px 5px 10px 0px #6f6f6f;
       }
 
@@ -89,6 +97,11 @@ main {
 
     .steer-control {
       flex-direction: row;
+
+      button {
+        width: 100px;
+        height: 65px;
+      }
     }
 
     .power-control {
@@ -96,22 +109,26 @@ main {
       align-items: center;
 
       button {
-        margin: 5px 0;
+        margin: 10px 10px;
+        height: 80px;
+        width:  80px;
       }
     }
 
     .speedometer {
+      flex-basis: 50%;
       text {
         font-family: sans-serif;
       }
 
       text.segment-value {
         stroke: #262c2e;
-        stroke-width: 1px;
+        stroke-width: 0.3mm;
       }
 
       text.current-value {
         letter-spacing: 1px;
+        font-size: 1.5em !important;
       }
     }
   }

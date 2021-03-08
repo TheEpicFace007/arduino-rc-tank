@@ -8,7 +8,7 @@ import Speedometer, { CustomSegmentLabelPosition } from "react-d3-speedometer";
 export function Drive()
 {
   // wait for the page to load before mounting joystick x
-  const SPEEDOMER_SIZE = window.screen.availHeight / 1.5;
+  const SPEEDOMER_SIZE = window.screen.height / 1.8;
   document.title = "Conduire";
 
   const [portraitModeError, setPortraitModeError] = useState(getScreenOrientation() == "landscape" ? false : true);
@@ -16,6 +16,10 @@ export function Drive()
   const [controlClass, setControlClass] = useState<string>("");
   const [RPM, setRPM] = useState(0);
   const [currentValueText, setCurrentValueText] = useState(`RPM: ${RPM}`);
+  useEffect(() =>
+  {
+    setCurrentValueText(`RPM: ${RPM}`)
+  }, [RPM])
 
   window.onorientationchange = function ()
   {
@@ -35,6 +39,8 @@ export function Drive()
     }
   }, [portraitModeError]);
 
+
+  const fontSize = "1.6em"
   return (
     <>
       <header>
@@ -62,33 +68,33 @@ export function Drive()
               value={RPM} currentValueText={currentValueText}
               customSegmentLabels={[
                 {
-                  color: "#9AB1C6",
+                  color: "#B5BEC6",
                   text: "1",
-                  fontSize: "18px",
+                  fontSize,
                   position: CustomSegmentLabelPosition.Inside
                 },
                 {
-                  color: "#9AB1C6",
+                  color: "#B5BEC6",
                   text: "2",
-                  fontSize: "18px",
+                  fontSize,
                   position: CustomSegmentLabelPosition.Inside
                 },
                 {
-                  color: "#9AB1C6",
+                  color: "#B5BEC6",
                   text: "3",
-                  fontSize: "18px",
+                  fontSize,
                   position: CustomSegmentLabelPosition.Inside
                 },
                 {
-                  color: "#9AB1C6",
+                  color: "#B5BEC6",
                   text: "4",
-                  fontSize: "18px",
+                  fontSize,
                   position: CustomSegmentLabelPosition.Inside
                 },
                 {
-                  color: "#9AB1C6",
+                  color: "#B5BEC6",
                   text: "5",
-                  fontSize: "18px",
+                  fontSize,
                   position: CustomSegmentLabelPosition.Inside
                 },
               ]}
