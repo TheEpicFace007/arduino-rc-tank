@@ -22,7 +22,7 @@ main {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    width: 100vw;
+    width: 95vw;
 
     div {
       width: 33vw !important;
@@ -32,14 +32,55 @@ main {
     .power-control {
       align-self: center;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       height: 40% !important;
 
-      button {
-        height: 64px;
-        width: 64px;
+      @keyframes onTouchReleaseAnimation {
+        from {
+          box-shadow: -3px 5px 10px 0px #6f6f6f;
+        }
+        to {
+          box-shadow: 0px 1px 10px 0px #6f6f6f;
+        }
       }
 
+      @keyframes onTouchAnimation {
+        from {
+          box-shadow: 0px 1px 10px 0px #6f6f6f;
+        }
+        to {
+          box-shadow: -3px 5px 10px 0px #6f6f6f;
+        }
+      }
+
+      $anim-duration: 100ms;
+
+      button {
+        $size: 64px;
+        height: $size;
+        width: $size;
+
+        background-color: #262626;
+        color: #eee;
+        border: 2px #808080 solid;
+        border-radius: 10px;
+        outline: none;
+
+        animation-name: onTouchAnimation;
+        animation-duration: $anim-duration;
+        animation-direction: normal;
+        animation-timing-function: cubic-bezier(0.55, 0.09, 0.68, 0.53);
+        animation-fill-mode: forwards;
+        // box-shadow: -3px 5px 10px 0px #6f6f6f;
+      }
+
+      button:active {
+        animation-name: onTouchReleaseAnimation;
+        animation-duration: $anim-duration;
+        animation-direction: normal;
+        animation-timing-function: cubic-bezier(0.55, 0.09, 0.68, 0.53);
+        animation-fill-mode: backwards;
+      }
 
       .ctrl {
         @include remove-button-style();
@@ -53,6 +94,10 @@ main {
     .power-control {
       flex-direction: column;
       align-items: center;
+
+      button {
+        margin: 5px 0;
+      }
     }
 
     .speedometer {
@@ -61,8 +106,12 @@ main {
       }
 
       text.segment-value {
-        stroke: #262C2E;
+        stroke: #262c2e;
         stroke-width: 1px;
+      }
+
+      text.current-value {
+        letter-spacing: 1px;
       }
     }
   }
