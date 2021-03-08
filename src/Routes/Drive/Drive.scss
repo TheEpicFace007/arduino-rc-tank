@@ -21,25 +21,42 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: baseline;
+    align-items: center;
     width: 100vw;
 
     div {
       width: 33vw !important;
-      height: fit-content;
     }
 
     .steer-control,
     .power-control {
-      display: grid;
+      align-self: center;
+      display: flex;
+      justify-content: space-between;
+      height: 40% !important;
+
+      button {
+        height: 64px;
+        width: 64px;
+      }
+
 
       .ctrl {
         @include remove-button-style();
       }
     }
 
+    .steer-control {
+      flex-direction: row;
+    }
+
+    .power-control {
+      flex-direction: column;
+      align-items: center;
+    }
+
     .speedometer {
-      text { 
+      text {
         font-family: sans-serif;
       }
 
