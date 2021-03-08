@@ -1,9 +1,8 @@
 import { nanoid } from "nanoid";
 import React from "react";
-import "./SettingComponents.scss"
+import "./SettingComponents.scss";
 
-export interface SettingSliderProps
-{
+export interface SettingSliderProps {
   min: number | string;
   max: number | string;
   default: number | string;
@@ -14,24 +13,23 @@ export interface SettingSliderProps
   onValueChange: (value: number) => void;
 }
 
-export function SettingSlider(props: SettingSliderProps)
-{
+export function SettingSlider(props: SettingSliderProps) {
   const [value, setValue] = React.useState(props.default);
-  
+
   return (
     <div className="setting-component-group">
       <p className="label">{props.label}</p>
-      <input type="range" defaultValue={props.default} min={props.min} max={props.max} 
-      onInput={onInputChange} step={props.step ?? ""}/>
+      <input type="range" defaultValue={props.default} min={props.min} max={props.max} value={value}
+        onInput={onInputChange} step={props.step ?? ""} />
       <p className="unit">{`${value}${" " + (props.unit ?? "")}`}</p>
     </div>
   );
 
-  function onInputChange(e: React.FormEvent<HTMLInputElement>)
-  {
-    const target = e.target;
+  function onInputChange(e: React.FormEvent<HTMLInputElement>) {
     //@ts-ignore
-    setValue(e.target.value)
-    console.log(value);
+    const newVal = e.target.value;
+      
+    setValue(newVal);
+    props.onValueChange(newVal);
   }
 }

@@ -13,17 +13,17 @@ import { SettingButtons } from "./Components/Buttons";
 type SettingPage = "power-setting" | "home";
 library.add(faHome, faArrowCircleLeft, faWrench);
 
-export function Settings()
-{
-  document.title = "Réglages"
+export function Settings() {
+  document.title = "Réglages";
 
   const [activeSettingPage, setActiveSettingPage] = useState<SettingPage>("home");
   const [previousActiveSettingPage, setPreviousSettingPage] = useState<SettingPage>("home");
 
+  let maxPower: number = parseInt(window.localStorage.getItem("max-engine-power") ?? "100") ?? 100
+
   const SettingTopBarItem: ControllerTopBarItem[] = [
     {
-      name: "Retour", icon: "arrow-circle-left", onClick: () =>
-      {
+      name: "Retour", icon: "arrow-circle-left", onClick: () => {
         if (activeSettingPage != "home") {
           setPreviousSettingPage(activeSettingPage);
           setActiveSettingPage(previousActiveSettingPage);
@@ -31,8 +31,7 @@ export function Settings()
       }
     },
     {
-      name: "Puissance du moteur", icon: "wrench", onClick: () => 
-      {
+      name: "Puissance du moteur", icon: "wrench", onClick: () => {
         if (activeSettingPage != "power-setting") {
           setPreviousSettingPage(activeSettingPage);
           setActiveSettingPage("power-setting");
@@ -40,6 +39,13 @@ export function Settings()
       }
     }
   ];
+
+
+  const onPowerChange = (power: number) => maxPower = power;
+
+  function onSaveEngineSettings(): void {
+    window.localStorage.setItem("max-engine-power", maxPower.toString());
+  }
 
   let toRender: JSX.Element;
 
@@ -54,11 +60,13 @@ export function Settings()
     case "power-setting":
       toRender = (
         <SettingPage name="Puissences des moteurs" key="puissences-des-moteurs">
-          <SettingSlider default={0} min={0} max={100} step="5" unit="%" label="Puissences des moteurs" onValueChange={onPowerChange} />
-          <SettingButtons name="Appliqué les changements" onClick={() => onSaveEngineSettings} />
+          <SettingSlider default={maxPower} min={0} max={100} step="5" unit="%" label="Puissences des moteurs" onValueChange={onPowerChange} />
+          <SettingButtons name="Appliqué les changements" onClick={() => onSaveEngineSettings()} />
         </SettingPage>
       );
       break;
+    default:
+      throw `Unexpected active page or forgot to implement active page ${activeSettingPage}`
   }
 
   return (
@@ -74,22 +82,4 @@ export function Settings()
       </main>
     </>
   );
-
-  function onPowerChange(power: number)
-  {
-    console.log(power);
-  }
-
-  function onLeftEngineChange(change: number)
-  {}
-
-  function onRightEngineChange(change: number)
-  {
-
-  }
-
-  function onSaveEngineSettings(): void
-  {
-
-  }
 }

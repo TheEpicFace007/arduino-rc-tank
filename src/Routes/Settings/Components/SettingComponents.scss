@@ -157,7 +157,7 @@
       $size: 36px;
       height: $size;
       text-align: center;
-      transition: background-color 250ms linear;
+      transition: background-color 80ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
       // reset style for ios
       -webkit-appearance: none;
@@ -165,7 +165,7 @@
 
     input[type="button"]:active {
       border-radius: 3px;
-      transition: background-color 250ms linear;
+      transition: background-color 80ms cubic-bezier(0.165, 0.84, 0.44, 1);
       background-color: #eee;
     }
     /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out

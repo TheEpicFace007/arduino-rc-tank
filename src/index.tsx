@@ -6,7 +6,12 @@ import { BrowserRouter, Route, Switch, } from 'react-router-dom';
 import { UnknownPage as NotFound } from "./Routes/404/404";
 import { Settings } from "./Routes/Settings/Settings";
 import { Drive } from "./Routes/Drive/Drive";
-import "./index.scss"
+import "./index.scss";
+
+// set the config if there's nothing set
+if (window.localStorage.length < 1) {
+  window.localStorage.setItem("max-engine-power", "100");
+}
 
 ReactDOM.render(
   <React.StrictMode>
@@ -34,8 +39,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-document.onloadedmetadata = () =>
-{
+document.onloadedmetadata = () => {
   switch (document.location.pathname) {
     case "/":
       document.title = "Menu principale";
