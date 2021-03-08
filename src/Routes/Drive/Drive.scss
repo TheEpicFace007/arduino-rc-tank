@@ -1,3 +1,9 @@
+@mixin remove-button-style() {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 main {
   display: grid;
   grid-auto-flow: row;
@@ -8,13 +14,13 @@ main {
   }
 
   .hidden {
-    display: none;
+    display: none !important;
   }
 
   .controls {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: baseline;
     width: 100vw;
 
@@ -28,11 +34,18 @@ main {
       display: grid;
 
       .ctrl {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        
+        @include remove-button-style();
+      }
+    }
 
+    .speedometer {
+      text { 
+        font-family: sans-serif;
+      }
+
+      text.segment-value {
+        stroke: #262C2E;
+        stroke-width: 1px;
       }
     }
   }
