@@ -10,4 +10,30 @@ main {
   .hidden {
     display: none;
   }
+
+  .controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: baseline;
+    width: 100vw;
+
+    div {
+      width: 33vw !important;
+      height: fit-content;
+    }
+
+    .steer-control,
+    .power-control {
+      display: grid;
+
+      .ctrl {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        
+
+      }
+    }
+  }
 }

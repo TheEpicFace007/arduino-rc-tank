@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { ControllerTopBar } from "../../Components/Topbar/ControllerTopBar";
 // import ReactNipple from "react-nipple";
 import "./Drive.scss";
-import { RpmGauge } from "../../Components/RpmGauge/RpmGauge"
 import { getScreenOrientation } from "../../Utils/getOrientation";
 
 
@@ -12,7 +11,7 @@ export function Drive()
   document.title = "Conduire";
   const [portraitModeError, setPortraitModeError] = useState(getScreenOrientation() == "landscape" ? false : true);
   const [errorDivClass, setErrorDivClass] = useState("portrait-mode-error");
-  const [rpmGaugeClass, setRPMGaugeClass] = useState<string>();
+  const [controlClass, setControlClass] = useState<string>("");
 
   window.onorientationchange = function()
   {
@@ -24,11 +23,11 @@ export function Drive()
   {
     if (portraitModeError) {
       setErrorDivClass("portrait-mode-error");
-      setRPMGaugeClass("hidden");
+      setControlClass("controls hidden");
     }
     else {
       setErrorDivClass("portrait-mode-error" + " hidden");
-      setRPMGaugeClass("");
+      setControlClass("controls");
     }
   }, [portraitModeError])
 
@@ -43,7 +42,21 @@ export function Drive()
         <div className={errorDivClass}>
           <h2>Vous pouvez uniquement utilisé l'application en mode paysage</h2>
         </div>
-        <RpmGauge className={rpmGaugeClass ?? ""} />
+
+        <div className={controlClass}>
+          <div className="steer-control">
+            <button className="ctrl">⮜</button>
+            <button className="ctrl">⮞</button>
+          </div>
+
+          <div className="speedometer">
+          </div>
+
+          <div className="power-control">
+            <button className="ctrl">⮝</button>
+            <button className="ctrl">⮟</button>
+          </div>
+        </div>
       </main>
     </>
   );
