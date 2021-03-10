@@ -1,11 +1,11 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "RC Tank",
+  "name": "Centre de control de tank téléguiddé",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "logo512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     },
     {
       "src": "logo192.png",
@@ -18,8 +18,35 @@
       "sizes": "512x512"
     }
   ],
+  "shortcuts": [
+    {
+      "name": "Reglé les parametètres certain reglage du véhicule",
+      "shortname": "Réglages",
+      "url": "/reglage",
+      "icon": [
+        {
+          "src": "wrench.png",
+          "type": "image/png",
+          "sizes": "300x300"
+        }
+      ]
+    },
+    {
+      "name": "Conduire le véhicule",
+      "shortname": "Conduire",
+      "url": "/drive",
+      "icon": [
+        {
+          "src": "wheel-drive.png",
+          "type": "image/png",
+          "sizes": "600x600"
+        }
+      ]
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#eee",
-  "background_color": "#3e3e3e"
+  "orientation": "landscape",
+  "theme_color": "#3e3e3e",
+  "background_color": "#eee"
 }
