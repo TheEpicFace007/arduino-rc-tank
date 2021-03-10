@@ -21,25 +21,25 @@
   "shortcuts": [
     {
       "name": "Reglé les parametètres certain reglage du véhicule",
-      "shortname": "Réglages",
+      "short_name": "Réglages",
       "url": "/reglage",
-      "icon": [
+      "icons": [
         {
-          "src": "wrench.png",
+          "src": "wrench96.png",
           "type": "image/png",
-          "sizes": "300x300"
+          "sizes": "96x96"
         }
       ]
     },
     {
       "name": "Conduire le véhicule",
-      "shortname": "Conduire",
+      "short_name": "Conduire",
       "url": "/drive",
-      "icon": [
+      "icons": [
         {
-          "src": "wheel-drive.png",
+          "src": "wheel-drive96.png",
           "type": "image/png",
-          "sizes": "600x600"
+          "sizes": "96x96"
         }
       ]
     }
