@@ -6,31 +6,19 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
-    "@types/classnames": "^2.2.11",
-    "classnames": "^2.2.6",
-    "flowtype": "^2.0.0",
-    "framer-motion": "^3.9.1",
     "lodash.find": "^4.6.0",
     "lodash.isequal": "^4.5.0",
     "lodash.random": "^3.2.0",
     "nanoid": "^3.1.20",
-    "nipple": "^2.5.6",
-    "nipplejs": "^0.9.0",
     "react": "^17.0.1",
     "react-d3-speedometer": "^1.0.1",
     "react-dom": "^17.0.1",
-    "react-native-vector-icons": "^8.1.0",
-    "react-nipple": "^1.0.2",
-    "react-ranger": "^2.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "roboto-sass": "^1.0.4",
-    "typescript": "^4.1.5",
     "uninstall": "0.0.0",
     "web-vitals": "^1.1.0"
   },
@@ -60,6 +48,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^6.1.1",
+    "@types/classnames": "^2.2.11",
     "@types/jest": "^26.0.20",
     "@types/lodash.find": "^4.6.6",
     "@types/lodash.isequal": "^4.5.5",
@@ -70,6 +59,7 @@
     "closure-webpack-plugin": "^2.5.0",
     "craco": "0.0.3",
     "google-closure-compiler": "^20210202.0.0",
-    "node-sass": "^5.0.0"
+    "node-sass": "^5.0.0",
+    "typescript": "^4.1.5"
   }
 }
