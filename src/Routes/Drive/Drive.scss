@@ -22,11 +22,14 @@ main {
   }
 
   .controls {
+    //background: #282828;
+    //height: 80vh;
+
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    width: 95vw;
+    width: 96vw;
 
     .steer-control,
     .power-control {
@@ -54,13 +57,13 @@ main {
         }
       }
 
-      $anim-duration: 6 0ms;
+      $anim-duration: 60ms;
 
       button {
         $size: 64px;
         height: $size;
         width: $size;
-        font-size: 22px;
+        font-size: 2em;
 
         background-color: #262626;
         color: #eee;
@@ -75,6 +78,8 @@ main {
         animation-direction: normal;
         animation-timing-function: cubic-bezier(0.55, 0.09, 0.68, 0.53);
         animation-fill-mode: forwards;
+        @include remove-button-style();
+
         ::selection {
           opacity: none;
         }
@@ -82,16 +87,12 @@ main {
         // box-shadow: -3px 5px 10px 0px #6f6f6f;
       }
 
-      button:active {
+      button.key-down {
         animation-name: onTouchReleaseAnimation;
         animation-duration: $anim-duration;
         animation-direction: normal;
         animation-timing-function: cubic-bezier(0.55, 0.09, 0.68, 0.53);
         animation-fill-mode: backwards;
-      }
-
-      .ctrl {
-        @include remove-button-style();
       }
     }
 
@@ -109,14 +110,14 @@ main {
       align-items: center;
 
       button {
-        margin: 10px 10px;
-        height: 80px;
-        width:  80px;
+        margin: 10px;
+        height: 115px;
+        width:  100px;
       }
     }
 
     .speedometer {
-      flex-basis: 50%;
+      flex-basis: 40%;
       text {
         font-family: sans-serif;
       }
@@ -129,6 +130,10 @@ main {
       text.current-value {
         letter-spacing: 1px;
         font-size: 1.5em !important;
+        ::selection {
+          fill-opacity: 0;
+          // block-opacity: 1;  
+        }
       }
     }
   }
