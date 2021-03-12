@@ -82,7 +82,7 @@ export function Drive() {
     if (!downButtonIsBeingHeld && !upButtonIsBeingHeld && !leftButtonIsBeingHeld && !rightButtonIsBeingHeld) {
       const interval = setInterval(() => {
         if (RPM <= 0) {
-          setRPM(0);
+          //setRPM(0);
           clearInterval(interval as unknown as number);
         }
         else {
