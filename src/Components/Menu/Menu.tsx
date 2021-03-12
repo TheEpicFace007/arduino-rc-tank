@@ -1,10 +1,6 @@
 import React from "react";
 import "./Menu.scss";
 import { MenuButton, MainMenuButtonState } from "./MenuButton";
-import
-{
-  TuneTwoTone, LocalTaxiTwoTone, HomeTwoTone
-} from "@material-ui/icons";
 import { FontAwesomeIcon, } from "@fortawesome/react-fontawesome";
 import { library, } from '@fortawesome/fontawesome-svg-core';
 import { faCar, faHome, faTools } from "@fortawesome/free-solid-svg-icons";

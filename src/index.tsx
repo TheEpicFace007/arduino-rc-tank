@@ -6,12 +6,14 @@ import { BrowserRouter, Route, Switch, } from 'react-router-dom';
 import { UnknownPage as NotFound } from "./Routes/404/404";
 import { Settings } from "./Routes/Settings/Settings";
 import { Drive } from "./Routes/Drive/Drive";
-import "./index.scss";
 
 // set the config if there's nothing set
-if (window.localStorage.length < 1) {
+if (!window.localStorage.getItem("max-engine-power"))
   window.localStorage.setItem("max-engine-power", "100");
-}
+if (!window.localStorage.getItem("turn-speed"))
+  window.localStorage.setItem("turn-speed", "50");
+
+import("./index.scss");
 
 ReactDOM.render(
   <React.StrictMode>
