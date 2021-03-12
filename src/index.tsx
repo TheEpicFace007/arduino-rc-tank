@@ -39,23 +39,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-document.onloadedmetadata = () => {
-  switch (document.location.pathname) {
-    case "/":
-      document.title = "Menu principale";
-      break;
-    case "/drive":
-      document.title = "Manette";
-      break;
-    case "/reglage":
-      document.title = "Réglage";
-      break;
-    default:
-      document.title = "404 - Page inconnue";
-      break;
-  }
-};
-
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

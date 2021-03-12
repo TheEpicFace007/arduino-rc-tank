@@ -15,11 +15,13 @@ library.add(faHome, faArrowCircleLeft, faWrench);
 
 export function Settings() {
   document.title = "Réglages";
+  const terminationEvent = 'onpagehide' in window ? 'pagehide' : 'unload';
+  document.addEventListener(terminationEvent, (event) => { }, { capture: true });
 
   const [activeSettingPage, setActiveSettingPage] = useState<SettingPage>("home");
   const [previousActiveSettingPage, setPreviousSettingPage] = useState<SettingPage>("home");
 
-  let maxPower: number = parseInt(window.localStorage.getItem("max-engine-power") ?? "100") ?? 100
+  let maxPower: number = parseInt(window.localStorage.getItem("max-engine-power") ?? "100") ?? 100;
 
   const SettingTopBarItem: ControllerTopBarItem[] = [
     {
@@ -66,7 +68,7 @@ export function Settings() {
       );
       break;
     default:
-      throw `Unexpected active page or forgot to implement active page ${activeSettingPage}`
+      throw `Unexpected active page or forgot to implement active page ${activeSettingPage}`;
   }
 
   return (

@@ -19,7 +19,7 @@ export function SettingSlider(props: SettingSliderProps) {
   return (
     <div className="setting-component-group">
       <p className="label">{props.label}</p>
-      <input type="range" defaultValue={props.default} min={props.min} max={props.max} value={value}
+      <input type="range" defaultValue={props.default} min={props.min} max={props.max}
         onInput={onInputChange} step={props.step ?? ""} />
       <p className="unit">{`${value}${" " + (props.unit ?? "")}`}</p>
     </div>

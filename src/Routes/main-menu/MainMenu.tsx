@@ -5,6 +5,10 @@ import "./MainMenu.scss"
 
 export default function MainMenu()
 {
+  const terminationEvent = 'onpagehide' in window ? 'pagehide' : 'unload';
+  document.addEventListener(terminationEvent, (event) => { }, { capture: true });
+
+
   document.title = "Menu principale";
   return (
     <>
