@@ -22,6 +22,7 @@ export function Settings() {
   const [previousActiveSettingPage, setPreviousSettingPage] = useState<SettingPage>("home");
 
   let maxPower: number = parseInt(window.localStorage.getItem("max-engine-power") ?? "100") ?? 100;
+  let turnSpeed: number = parseInt(window.localStorage.getItem("turn-speed") ?? "100") ?? 100;
 
   const SettingTopBarItem: ControllerTopBarItem[] = [
     {
@@ -44,9 +45,11 @@ export function Settings() {
 
 
   const onPowerChange = (power: number) => maxPower = power;
+  const onTurnSpeedChange = (speed: number) => turnSpeed = speed;
 
   function onSaveEngineSettings(): void {
     window.localStorage.setItem("max-engine-power", maxPower.toString());
+    window.localStorage.setItem("turn-speed", turnSpeed.toString());
   }
 
   let toRender: JSX.Element;
@@ -63,6 +66,7 @@ export function Settings() {
       toRender = (
         <SettingPage name="Puissences des moteurs" key="puissences-des-moteurs">
           <SettingSlider default={maxPower} min={0} max={100} step="5" unit="%" label="Puissences des moteurs" onValueChange={onPowerChange} />
+          <SettingSlider default={turnSpeed} min={0} max={50} label="Vitesse a laquel le véhicule va tourné" onValueChange={onTurnSpeedChange} />
           <SettingButtons name="Appliqué les changements" onClick={() => onSaveEngineSettings()} />
         </SettingPage>
       );
