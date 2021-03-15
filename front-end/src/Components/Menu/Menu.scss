@@ -2,47 +2,50 @@
 @import "~roboto-sass/scss/roboto";
 @import url("https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap");
 
-.dimmed {
-  .menu {
-    background-color: #222;
-    color: white;
-    display: flex;
+.menu {
+  background-color: #222;
+  color: white;
+  display: flex;
 
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    align-content: center;
-    width: 100vw;
-    height: 60vh;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  width: 100vw;
+  height: 60vh;
 
-    .menu-btn {
-      // appearance
-      background-color: #333;
-      // size
-      $size: 256px - 80px;
-      width: 206.16px;
-      height: 206.16px;
-      // text
-      text-transform: uppercase;
-      font-family: "Roboto", "Tahoma", sans-serif;
-      text-align: center;
-      font-size: 24px;
+  .menu-btn {
+    // appearance
+    background-color: #333;
+    // size
+    $size: 256px - 80px;
+    width: 206.16px;
+    height: 206.16px;
+    // text
+    text-transform: uppercase;
+    font-family: "Roboto", "Tahoma", sans-serif;
+    text-align: center;
+    font-size: 24px;
 
-      // childs
-      .MuiSvgIcon-root {
-        font-size: 52px;
-        margin-top: 20px;
-      }
-      .menu-btn .MuiSvgIcon-roo {
-        color: rgb(232, 238, 243);
-      }
+    // childs
+    .MuiSvgIcon-root {
+      font-size: 52px;
+      margin-top: 20px;
+    }
+    .menu-btn .MuiSvgIcon-roo {
+      color: rgb(232, 238, 243);
+    }
 
-      svg {
-        margin: 15px;
-      }
-      .btn-selected {
-        opacity: 60%;
-      }
+    svg {
+      margin: 15px;
+    }
+    .btn-selected {
+      opacity: 40%;
+    }
+  }
+  @media all and (display-mode: standalone) {
+    .menu-btn.btn-selected {
+      opacity: 50%;
     }
   }
 }

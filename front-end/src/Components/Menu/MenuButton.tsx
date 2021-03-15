@@ -6,6 +6,8 @@ export interface MainMenuButtonProps
   onClick: (b: string) => void;
   isSelected: boolean;
   icon: JSX.Element;
+  disabled?: boolean;
+  className?: string;
 };
 
 export type MainMenuButtonState = {
@@ -18,7 +20,7 @@ export function MenuButton(props: MainMenuButtonProps)
 {
   return (
     <div className="menu-btn">
-      <div className={`main-menu-button${props.isSelected ? " " + "btn-selected" : ""}`}
+      <div className={`main-menu-button${props.isSelected ? " " + "btn-selected" : ""} ${props.disabled == true ? "disabled" : ""} ${props.className ?? ""}`}
         onClick={() => props.onClick(props.name)}>
         {props.icon}
         <h3>{props.name}</h3>

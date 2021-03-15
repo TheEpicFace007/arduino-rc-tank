@@ -6,11 +6,11 @@ import "./Drive.scss";
 // import ReactNipple from "react-nipple";
 
 enum GearSpeed {
-  Gear1 = 40,
-  Gear2 = 70,
-  Gear3 = 85,
-  Gear4 = 100,
-  Gear5 = 140
+  Gear1 = 30,
+  Gear2 = 30,
+  Gear3 = 30,
+  Gear4 = 30,
+  Gear5 = 30
 };
 
 export function Drive() {
@@ -32,32 +32,35 @@ export function Drive() {
   /* left button */
   const [leftButtonClass, setLeftButtonClass] = useState("ctrl");
   const [leftButtonIntervalID, setLeftButtonIntervalID] = useState<NodeJS.Timeout>();
-  const [leftButtonIsBeingHeld, setLeftButtonHeld] = useState(false);
+  const [leftButtonIsBeingHeld, setLeftButtonHeld] = useState<boolean>(false);
   /* right button */
   const [rightButtonClass, setRightButtonClass] = useState("ctrl");
   const [rightButtonIntervalID, setRightButtonIntervalID] = useState<NodeJS.Timeout>();
-  const [rightButtonIsBeingHeld, setRightButtonHeld] = useState(false);
+  const [rightButtonIsBeingHeld, setRightButtonHeld] = useState<boolean>(false);
   /* up button */
   const [upButtonClass, setUpButtonClass] = useState("ctrl");
   const [upButtonIntervalID, setUpButtonIntervalID] = useState<NodeJS.Timeout>();
-  const [upButtonIsBeingHeld, setUpButtonHeld] = useState(false);
+  const [upButtonIsBeingHeld, setUpButtonHeld] = useState<boolean>(false);
   /* down button */
   const [downButtonClass, setDownButtonClass] = useState("ctrl");
   const [downButtonIntervalID, setDownButtonIntervalID] = useState<NodeJS.Timeout>();
-  const [downButtonIsBeingHeld, setDownButtonHeld] = useState(false);
+  const [downButtonIsBeingHeld, setDownButtonHeld] = useState<boolean>(false);
 
-  let timeoutDuration = 80;
+  const getNeedleSpeed = () => getIntervalDureation(RPM)
+
 
   let didReachedMax;
 
   useEffect(() => {
 
     // avoid rpm being too low
-    if (RPM < 0)
+    if (RPM < 0) {
       setRPM(0);
-    else if (RPM > 1000)
-      setRPM(1000);
-
+      
+    }
+    else if (RPM > 1000) {
+      setRPM(1000)
+    }
     //setCurrentRPMText(`RPM: ${RPM}`);
   }, [RPM]);
 
@@ -77,32 +80,17 @@ export function Drive() {
     }
   }, [portraitModeError]);
 
-  useEffect(() => {
-    console.log({downButtonIsBeingHeld, upButtonIsBeingHeld, leftButtonIsBeingHeld, rightButtonIsBeingHeld})
-    if (!downButtonIsBeingHeld && !upButtonIsBeingHeld && !leftButtonIsBeingHeld && !rightButtonIsBeingHeld) {
-      const interval = setInterval(() => {
-        if (RPM <= 0) {
-          //setRPM(0);
-          clearInterval(interval as unknown as number);
-        }
-        else {
-          if (RPM - 1 != -1)
-            setRPM((RPM) => --RPM);
-        }
-      }, 40);
-    }
-  }, [downButtonIsBeingHeld, upButtonIsBeingHeld, leftButtonIsBeingHeld, rightButtonIsBeingHeld]);
+ 
 
   // left button
   function onLeftBtnHold() {
-    if (leftButtonIsBeingHeld)
-      return;
-
-    setLeftButtonHeld(true);
-    setLeftButtonClass("ctrl key-down");
-    setLeftButtonIntervalID(setInterval(() => {
-      console.log("pog");
-    }, timeoutDuration));
+    if (!leftButtonIsBeingHeld) {
+      setLeftButtonHeld(true);
+      setLeftButtonClass("ctrl key-down");
+      setLeftButtonIntervalID(setInterval(() => {
+        console.log("left button is being held");
+      }, 20));
+    }
   }
 
   function onLeftBtnRelease() {
@@ -120,7 +108,7 @@ export function Drive() {
     setRightButtonClass("ctrl key-down");
     setRightButtonIntervalID(setInterval(() => {
       console.log("pog");
-    }, timeoutDuration));
+    }, 20));
   }
 
   function onRightBtnRelease() {
@@ -131,7 +119,7 @@ export function Drive() {
 
   // up button
   let speed = 0;
-  const INTERVAL_TIME = 50;
+  // const getNeedleSpeed() = 50;
   const RPM_TO_DEC = 10;
   const RPM_TO_INC = 10;
 
@@ -142,8 +130,8 @@ export function Drive() {
       let value = 0;
       setUpButtonIntervalID(setInterval(() => {
         setRPM((RPM) => RPM + RPM_TO_INC);
-        console.debug("Changed RPM: ", RPM);
-      }, INTERVAL_TIME));
+        //console.debug("Changed RPM: ", RPM);
+      }, getNeedleSpeed()));
     }
   }
 
@@ -160,7 +148,7 @@ export function Drive() {
       setDownButtonClass("ctrl key-down");
       setDownButtonIntervalID(setInterval(() => {
         setRPM((RPM) => RPM - RPM_TO_DEC);
-      }, INTERVAL_TIME));
+      }, getNeedleSpeed()));
     }
   }
 
@@ -186,9 +174,17 @@ export function Drive() {
         <div className={controlClass}>
           <div className="steer-control">
             <button className={leftButtonClass} onMouseDown={onLeftBtnHold}
-              onPointerLeave={onLeftBtnRelease} onContextMenu={(e) => e.preventDefault()}>⮜</button>
+              onPointerLeave={onLeftBtnRelease} onContextMenu={(e) => e.preventDefault()}
+              onPointerUp={onLeftBtnRelease} onSelect={(e) => e.preventDefault()}
+            >
+              ⮜
+            </button>
             <button className={rightButtonClass} onMouseDown={onRightBtnHold}
-              onPointerLeave={onRightBtnRelease} onContextMenu={(e) => e.preventDefault()}>⮞</button>
+              onPointerLeave={onRightBtnRelease} onContextMenu={(e) => e.preventDefault()}
+              onPointerUp={onRightBtnRelease} onSelect={(e) => e.preventDefault()}
+            >
+              ⮞
+            </button>
           </div>
 
           <div className="speedometer">
@@ -232,13 +228,21 @@ export function Drive() {
                 },
               ]}
               segmentColors={["#414B4F", "#505C61", "#627178", "#6F8087", "#7D9199"]}
-              minValue={0}
+              minValue={0} maxValue={1000} needleTransitionDuration={getNeedleSpeed()}
             />
           </div>
 
           <div className="power-control">
-            <button className={upButtonClass} onMouseDown={onUpBtnHold} onPointerLeave={onUpBtnRelease}>⮝</button>
-            <button className={downButtonClass} onMouseDown={onDownBtnHold} onPointerLeave={onDownBtnRelease}>⮟</button>
+            <button className={upButtonClass} onMouseDown={onUpBtnHold} onPointerLeave={onUpBtnRelease}
+              onContextMenu={(e) => e.preventDefault()} onPointerUp={onUpBtnRelease} onSelect={(e) => e.preventDefault()}
+            >
+              ⮝
+            </button>
+            <button className={downButtonClass} onMouseDown={onDownBtnHold} onPointerLeave={onDownBtnRelease}
+              onContextMenu={(e) => e.preventDefault()} onPointerUp={onDownBtnRelease} onSelect={(e) => e.preventDefault()}
+            >
+              ⮟
+            </button>
           </div>
         </div>
       </main>
@@ -258,5 +262,5 @@ function getIntervalDureation(rpm: number): GearSpeed {
   else if (rpm <= 1000)
     return GearSpeed.Gear5;
   else
-    throw new Error("Unexpected interval duration for RPM \"" + rpm + "\"");
+    return GearSpeed.Gear5;
 }

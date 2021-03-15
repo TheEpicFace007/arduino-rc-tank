@@ -7,26 +7,25 @@ import { faCar, faHome, faTools } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faCar, faHome, faTools);
 
-export type MenuState =
-  [
-    { name: "Acceuil", isSelected: boolean; icon: JSX.Element; },
-    { name: "Conduire", isSelected: boolean; icon: JSX.Element; },
-    { name: "Réglage", isSelected: boolean; icon: JSX.Element; }
-  ];
+export type MenuState = { name: ButtonTitle, isSelected: boolean; icon: JSX.Element; disabled?: boolean; className?: string };
 
-export type button_title = "Acceuil" | "Conduire" | "Réglage";
+export type ButtonTitle = "Installé l'app" | "Conduire" | "Réglage";
 
-export function Menu()
-{
-  const MAIN_MENU_BUTTON: MenuState =
+export function Menu() {
+  let isAppInstalled;
+  if (window.matchMedia('(display-mode: standalone)'))
+    isAppInstalled = true
+  else
+    isAppInstalled = false
+  const MAIN_MENU_BUTTON: MenuState[] =
     [
-      { name: "Acceuil", isSelected: false, icon: <FontAwesomeIcon icon="home" size="4x" /> },
+      { name: "Installé l'app", isSelected: false, icon: <FontAwesomeIcon icon="home" size="4x" />, className: "install-btn"},
       { name: "Conduire", isSelected: false, icon: <FontAwesomeIcon icon="car" size="4x" /> },
       { name: "Réglage", isSelected: false, icon: <FontAwesomeIcon icon="tools" size="4x" /> }
     ];
   switch (document.location.pathname) {
     case "/":
-      MAIN_MENU_BUTTON[0].isSelected = true;
+      // MAIN_MENU_BUTTON[0].isSelected = true;
       break;
     case "/drive":
       MAIN_MENU_BUTTON[1].isSelected = true;
@@ -36,10 +35,9 @@ export function Menu()
       break;
   }
 
-  function onButtonClick(button: button_title & string): void
-  {
+  function onButtonClick(button: ButtonTitle & string): void {
     switch (button) {
-      case "Acceuil":
+      case "Installé l'app":
         if (document.location.pathname == "/")
           break;
         document.location.pathname = "/";
@@ -59,13 +57,12 @@ export function Menu()
 
   return (
     <>
-        <div className="dimmed">
-          <div className="menu">
-            {/* @ts-ignore*/}
-            {MAIN_MENU_BUTTON.map((state) => <MenuButton name={state.name} onClick={(b) => onButtonClick(b)}
-              isSelected={state.isSelected} icon={state.icon} key={state.name} />)}
-          </div>
+      <div className="dimmed">
+        <div className="menu">
+          {MAIN_MENU_BUTTON.map((state) => <MenuButton name={state.name} onClick={(b) => onButtonClick(b as ButtonTitle)}
+            isSelected={state.isSelected} icon={state.icon} key={state.name} />)}
         </div>
+      </div>
     </>
   );
 }
