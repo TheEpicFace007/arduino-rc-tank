@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Speedometer, { CustomSegmentLabelPosition } from "react-d3-speedometer";
+import Speedometer, { CustomSegmentLabelPosition, Transition } from "react-d3-speedometer";
 import { scryRenderedComponentsWithType } from "react-dom/test-utils";
 import { ControllerTopBar } from "../../Components/Topbar/ControllerTopBar";
 import { getScreenOrientation } from "../../Utils/getOrientation";
@@ -171,16 +171,10 @@ export function Drive() {
 
         <div className={controlClass}>
           <div className="steer-control">
-            <button className={leftButtonClass} onMouseDown={onLeftBtnHold}
-              onPointerLeave={onLeftBtnRelease} onContextMenu={(e) => e.preventDefault()}
-              onPointerUp={onLeftBtnRelease} onSelect={(e) => e.preventDefault()}
-            >
+            <button className={leftButtonClass} onTouchStart={onLeftBtnHold} onTouchEnd={onLeftBtnRelease}>
               ⮜
             </button>
-            <button className={rightButtonClass} onMouseDown={onRightBtnHold}
-              onPointerLeave={onRightBtnRelease} onContextMenu={(e) => e.preventDefault()}
-              onPointerUp={onRightBtnRelease} onSelect={(e) => e.preventDefault()}
-            >
+            <button className={rightButtonClass} onTouchStart={onRightBtnHold} onTouchEnd={onRightBtnRelease}>
               ⮞
             </button>
           </div>
@@ -226,18 +220,15 @@ export function Drive() {
                 },
               ]}
               segmentColors={["#414B4F", "#505C61", "#627178", "#6F8087", "#7D9199"]}
+              needleTransitionDuration={getNeedleSpeed()} needleTransition={Transition.easeSinInOut}
             />
           </div>
 
           <div className="power-control">
-            <button className={upButtonClass} onMouseDown={onUpBtnHold} onPointerLeave={onUpBtnRelease}
-              onContextMenu={(e) => e.preventDefault()} onPointerUp={onUpBtnRelease} onSelect={(e) => e.preventDefault()}
-            >
+            <button className={upButtonClass} onTouchStart={onUpBtnHold}  onTouchEnd={onUpBtnRelease}>
               ⮝
             </button>
-            <button className={downButtonClass} onMouseDown={onDownBtnHold} onPointerLeave={onDownBtnRelease}
-              onContextMenu={(e) => e.preventDefault()} onPointerUp={onDownBtnRelease} onSelect={(e) => e.preventDefault()}
-            >
+            <button className={downButtonClass} onTouchStart={onDownBtnHold} onTouchEnd={onDownBtnRelease}>
               ⮟
             </button>
           </div>
