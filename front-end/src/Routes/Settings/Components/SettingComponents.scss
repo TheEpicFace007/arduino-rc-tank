@@ -2,14 +2,14 @@
 
 .setting-page-intro {
   h2 {
-    font-family: "Roboto";
+    font-family: "Roboto", "Tahoma", sans-serif;
 
     font-weight: 500;
   }
 }
 
 .setting-page {
-  font-family: "Roboto";
+  font-family: "Roboto", "Tahoma", sans-serif;
   // position and size
   width: 80vw;
   margin-top: 20px;
@@ -144,7 +144,7 @@
       line-height: 1.2;
       white-space: nowrap;
       text-decoration: none;
-      padding: 0.25rem 0.5rem;
+      padding: 0.25rem 2rem;
       margin: 0.25rem;
       cursor: pointer;
       outline: none;
@@ -157,7 +157,7 @@
       $size: 36px;
       height: $size;
       text-align: center;
-      transition: background-color 80ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: background-color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
       // reset style for ios
       -webkit-appearance: none;
@@ -165,7 +165,7 @@
 
     input[type="button"]:active {
       border-radius: 3px;
-      transition: background-color 80ms cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: background-color 120ms cubic-bezier(0.165, 0.84, 0.44, 1);
       background-color: #eee;
     }
     /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out

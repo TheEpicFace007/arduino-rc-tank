@@ -3,17 +3,17 @@ import "./Settings.scss";
 import { TopBar } from "../../Components/Topbar/TopBar";
 import { ControllerTopBar, ControllerTopBarItem } from "../../Components/Topbar/ControllerTopBar";
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowCircleLeft, faHome, faWrench } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleLeft, faEllipsisH, faHome, faWrench } from "@fortawesome/free-solid-svg-icons";
 import { TopBarButton } from "../../Components/Topbar/TopBarButton";
 import { compilation } from "webpack";
 import { SettingSlider } from "./Components/Slider";
 import { SettingPage } from "./Components/SettingPage";
 import { SettingButtons } from "./Components/Buttons";
 
-type SettingPage = "power-setting" | "home";
-library.add(faHome, faArrowCircleLeft, faWrench);
+type SettingPage = "power-setting" | "home" | "autre";
 
 export function Settings() {
+  library.add(faHome, faArrowCircleLeft, faWrench, faEllipsisH);
   document.title = "Réglages";
   const terminationEvent = 'onpagehide' in window ? 'pagehide' : 'unload';
   document.addEventListener(terminationEvent, (event) => { }, { capture: true });
@@ -36,6 +36,12 @@ export function Settings() {
           setPreviousSettingPage(activeSettingPage);
           setActiveSettingPage("power-setting");
         }
+      }
+    },
+    {
+      name: "Autre", icon: "ellipsis-h", onClick: () => {
+        setPreviousSettingPage(activeSettingPage);
+        setActiveSettingPage("autre")
       }
     }
   ];
@@ -74,8 +80,22 @@ export function Settings() {
         </SettingPage>
       );
       break;
+    case "autre":
+      toRender = (
+        <SettingPage name="Autre" key="autre">
+          <SettingButtons name="Rénitialize toute les reglages" onClick={() => {
+            if (window.confirm("Etes vous sure de vouloir rénitallisé tout les paramètres?")) {
+              window.localStorage.clear();
+              alert("Rénitialization des reglage fait avec sucesst!")
+              window.location.reload();
+            }
+          }} />
+        </SettingPage>
+      );
+
+      break;
     default:
-      throw `Unexpected active page or forgot to implement active page ${activeSettingPage}`;
+      throw new Error(`Unexpected active page or forgot to implement setting page "${activeSettingPage}"`);
   }
 
   return (
