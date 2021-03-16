@@ -11,7 +11,9 @@ import { Drive } from "./Routes/Drive/Drive";
 if (!window.localStorage.getItem("max-engine-power"))
   window.localStorage.setItem("max-engine-power", "100");
 if (!window.localStorage.getItem("turn-speed"))
-  window.localStorage.setItem("turn-speed", "50");
+  window.localStorage.setItem("turn-speed", "20");
+if (!window.localStorage.getItem("accel-speed"))
+  window.localStorage.setItem("accel-speed", "50");
 
 import("./index.scss");
 

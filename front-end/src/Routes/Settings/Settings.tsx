@@ -21,9 +21,6 @@ export function Settings() {
   const [activeSettingPage, setActiveSettingPage] = useState<SettingPage>("home");
   const [previousActiveSettingPage, setPreviousSettingPage] = useState<SettingPage>("home");
 
-  let maxPower: number = parseInt(window.localStorage.getItem("max-engine-power") ?? "100") ?? 100;
-  let turnSpeed: number = parseInt(window.localStorage.getItem("turn-speed") ?? "100") ?? 100;
-
   const SettingTopBarItem: ControllerTopBarItem[] = [
     {
       name: "Retour", icon: "arrow-circle-left", onClick: () => {
@@ -43,13 +40,18 @@ export function Settings() {
     }
   ];
 
+  let maxPower: number = parseInt(window.localStorage.getItem("max-engine-power") ?? "100") ?? 100;
+  let turnSpeed: number = parseInt(window.localStorage.getItem("turn-speed") ?? "20") ?? 20;
+  let accelSpeed = parseInt(window.localStorage.getItem("accel-speed") ?? "50") ?? 50;
 
   const onPowerChange = (power: number) => maxPower = power;
   const onTurnSpeedChange = (speed: number) => turnSpeed = speed;
+  const onAccelSpeedChange = (speed: number) => accelSpeed = speed;
 
   function onSaveEngineSettings(): void {
     window.localStorage.setItem("max-engine-power", maxPower.toString());
     window.localStorage.setItem("turn-speed", turnSpeed.toString());
+    window.localStorage.setItem("accel-speed", accelSpeed.toString());
   }
 
   let toRender: JSX.Element;
@@ -66,7 +68,8 @@ export function Settings() {
       toRender = (
         <SettingPage name="Puissences des moteurs" key="puissences-des-moteurs">
           <SettingSlider default={maxPower} min={0} max={100} step="5" unit="%" label="Puissences des moteurs" onValueChange={onPowerChange} />
-          <SettingSlider default={turnSpeed} min={0} max={50} label="Vitesse a laquel le véhicule va tourné" onValueChange={onTurnSpeedChange} />
+          <SettingSlider default={turnSpeed} min={5} max={50} unit="ms" label="Vitesse a laquel le véhicule va tourné" onValueChange={onTurnSpeedChange} />
+          <SettingSlider default={accelSpeed} step="5" min={5} max={250} unit="ms" label="Vitesse d'accélération" onValueChange={onAccelSpeedChange}/>
           <SettingButtons name="Appliqué les changements" onClick={() => onSaveEngineSettings()} />
         </SettingPage>
       );
