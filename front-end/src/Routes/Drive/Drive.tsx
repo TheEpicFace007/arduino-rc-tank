@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Speedometer, { CustomSegmentLabelPosition } from "react-d3-speedometer";
+import { scryRenderedComponentsWithType } from "react-dom/test-utils";
 import { ControllerTopBar } from "../../Components/Topbar/ControllerTopBar";
 import { getScreenOrientation } from "../../Utils/getOrientation";
 import "./Drive.scss";
@@ -7,10 +8,10 @@ import "./Drive.scss";
 
 enum GearSpeed {
   Gear1 = 30,
-  Gear2 = 30,
-  Gear3 = 30,
-  Gear4 = 30,
-  Gear5 = 30
+  Gear2 = 40,
+  Gear3 = 50,
+  Gear4 = 60,
+  Gear5 = 70
 };
 
 export function Drive() {
@@ -46,7 +47,7 @@ export function Drive() {
   const [downButtonIntervalID, setDownButtonIntervalID] = useState<NodeJS.Timeout>();
   const [downButtonIsBeingHeld, setDownButtonHeld] = useState<boolean>(false);
 
-  const getNeedleSpeed = () => getIntervalDureation(RPM)
+  const getNeedleSpeed = () => getIntervalDureation(RPM);
 
 
   let didReachedMax;
@@ -56,10 +57,10 @@ export function Drive() {
     // avoid rpm being too low
     if (RPM < 0) {
       setRPM(0);
-      
+
     }
     else if (RPM > 1000) {
-      setRPM(1000)
+      setRPM(1000);
     }
     //setCurrentRPMText(`RPM: ${RPM}`);
   }, [RPM]);
@@ -79,8 +80,6 @@ export function Drive() {
       setControlClass("controls");
     }
   }, [portraitModeError]);
-
- 
 
   // left button
   function onLeftBtnHold() {
@@ -158,7 +157,6 @@ export function Drive() {
     clearInterval(downButtonIntervalID as unknown as number ?? NaN);
   }
 
-
   const fontSize = "1.6em";
   return (
     <>
@@ -228,7 +226,6 @@ export function Drive() {
                 },
               ]}
               segmentColors={["#414B4F", "#505C61", "#627178", "#6F8087", "#7D9199"]}
-              minValue={0} maxValue={1000} needleTransitionDuration={getNeedleSpeed()}
             />
           </div>
 
@@ -250,8 +247,9 @@ export function Drive() {
   );
 }
 
-function getIntervalDureation(rpm: number): GearSpeed {
-  if (rpm <= 200)
+function getIntervalDureation(rpm: number): number {
+  return parseInt(window.localStorage.getItem("accel-speed") ?? "50")
+  /* if (rpm <= 200)
     return GearSpeed.Gear1;
   else if (rpm <= 400)
     return GearSpeed.Gear2;
@@ -262,5 +260,13 @@ function getIntervalDureation(rpm: number): GearSpeed {
   else if (rpm <= 1000)
     return GearSpeed.Gear5;
   else
-    return GearSpeed.Gear5;
+    return GearSpeed.Gear5; */
+}
+
+async function syncTimeout(ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
 }
