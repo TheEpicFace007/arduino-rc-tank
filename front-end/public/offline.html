@@ -9,16 +9,38 @@
 </head>
 
 <body>
-  <h1>Hors ligne</h1>
-  <p>Tu est en ce montment pas connecté a internet. Connecte toi a l'internet de l'arduino pour
+  <h1 id="title">Hors ligne</h1>
+  <p id="info">Tu est en ce montment pas connecté a internet. Connecte toi a l'internet de l'arduino pour
     utilisé la manette.
   </p>
-
+    <p id="desert">🏜️</p>
   <style>
     body {
-      background-color: #1e1e1e;
+      background-color: #3E3E3E;
       color: #e1e1e1;
       font-family: "Tahoma", sans-serif;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #title {
+      font-size: 3.5em;
+      -webkit-text-stroke: 3px black;
+      padding: 5px;
+    }
+
+    #info {
+      font-size: 1.5em;
+      margin: 5px;
+    }
+
+    #desert {
+      text-align: center;
+      font-size: 110px;
+      margin: 10px;
+      border: 1px solid red;
     }
   </style>
 </body>
