@@ -15,6 +15,11 @@ if (!window.localStorage.getItem("turn-speed"))
 if (!window.localStorage.getItem("accel-speed"))
   window.localStorage.setItem("accel-speed", "50");
 
+// register the service worker
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/service-worker.js", { type: "classic" });
+}
+
 import("./index.scss");
 
 ReactDOM.render(
