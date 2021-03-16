@@ -11,6 +11,9 @@ module.exports = {
             create_source_map: true,
           })
       ]
+    },
+    output: {
+      splitChunks: false
     }
   }
 };
