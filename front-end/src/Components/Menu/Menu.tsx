@@ -1,25 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Menu.scss";
 import { MenuButton, MainMenuButtonState } from "./MenuButton";
 import { FontAwesomeIcon, } from "@fortawesome/react-fontawesome";
 import { library, } from '@fortawesome/fontawesome-svg-core';
 import { faCar, faHome, faTools } from "@fortawesome/free-solid-svg-icons";
+import PwaInstallPoup from "../PwaInstallPopup/PwaInstallPopup";
 
 library.add(faCar, faHome, faTools);
 
-export type MenuState = { name: ButtonTitle, isSelected: boolean; icon: JSX.Element; disabled?: boolean; className?: string };
+export type MenuState = { name: ButtonTitle, isSelected: boolean; icon: JSX.Element; disabled?: boolean; className?: string; };
 
 export type ButtonTitle = "Installer l'app" | "Conduire" | "Réglage";
 
 export function Menu() {
   let isAppInstalled;
   if (window.matchMedia('(display-mode: standalone)'))
-    isAppInstalled = true
+    isAppInstalled = true;
   else
-    isAppInstalled = false
+    isAppInstalled = false;
   const MAIN_MENU_BUTTON: MenuState[] =
     [
-      { name: "Installer l'app", isSelected: false, icon: <FontAwesomeIcon icon="home" size="4x" />, className: "install-btn"},
+      { name: "Installer l'app", isSelected: false, icon: <FontAwesomeIcon icon="home" size="4x" />, className: "install-btn" },
       { name: "Conduire", isSelected: false, icon: <FontAwesomeIcon icon="car" size="4x" /> },
       { name: "Réglage", isSelected: false, icon: <FontAwesomeIcon icon="tools" size="4x" /> }
     ];
@@ -35,12 +36,15 @@ export function Menu() {
       break;
   }
 
+  const [showInstallPopup, setShowInstallPopup] = useState(false);
+
+
   function onButtonClick(button: ButtonTitle & string): void {
     switch (button) {
       case "Installer l'app":
-        if (document.location.pathname == "/")
-          break;
-        document.location.pathname = "/";
+        alert("Connnecte-toi aux données cellulaires ou a un WI-FI autre que celui de l'Arduino pour voir le tutoriel sur comment installer l'appli");
+        window.open("https://mobilesyrup.com/2020/05/24/how-install-progressive-web-app-pwa-android-ios-pc-mac", undefined,
+                    "blabla, height=480, width=640, resizable=off"); // osti que chu lazy tabarnack
         break;
       case "Conduire":
         if (document.location.pathname == "/drive")
@@ -63,6 +67,7 @@ export function Menu() {
             isSelected={state.isSelected} icon={state.icon} key={state.name} />)}
         </div>
       </div>
+      
     </>
   );
 }

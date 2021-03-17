@@ -19,13 +19,14 @@
     background-color: #333;
     // size
     $size: 256px - 80px;
-    width: 206.16px;
-    height: 206.16px;
+    width: $size;
+    height: $size;
     // text
     text-transform: uppercase;
     font-family: "Roboto", "Tahoma", sans-serif;
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
+    margin: auto;
 
     // childs
     .MuiSvgIcon-root {
@@ -41,6 +42,10 @@
     }
     .btn-selected {
       opacity: 40%;
+    }
+
+    h3 {
+      margin: 5px 0;
     }
   }
   @media all and (display-mode: standalone) {
