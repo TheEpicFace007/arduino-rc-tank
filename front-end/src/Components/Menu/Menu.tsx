@@ -9,7 +9,7 @@ library.add(faCar, faHome, faTools);
 
 export type MenuState = { name: ButtonTitle, isSelected: boolean; icon: JSX.Element; disabled?: boolean; className?: string };
 
-export type ButtonTitle = "Installé l'app" | "Conduire" | "Réglage";
+export type ButtonTitle = "Installer l'app" | "Conduire" | "Réglage";
 
 export function Menu() {
   let isAppInstalled;
@@ -19,7 +19,7 @@ export function Menu() {
     isAppInstalled = false
   const MAIN_MENU_BUTTON: MenuState[] =
     [
-      { name: "Installé l'app", isSelected: false, icon: <FontAwesomeIcon icon="home" size="4x" />, className: "install-btn"},
+      { name: "Installer l'app", isSelected: false, icon: <FontAwesomeIcon icon="home" size="4x" />, className: "install-btn"},
       { name: "Conduire", isSelected: false, icon: <FontAwesomeIcon icon="car" size="4x" /> },
       { name: "Réglage", isSelected: false, icon: <FontAwesomeIcon icon="tools" size="4x" /> }
     ];
@@ -37,7 +37,7 @@ export function Menu() {
 
   function onButtonClick(button: ButtonTitle & string): void {
     switch (button) {
-      case "Installé l'app":
+      case "Installer l'app":
         if (document.location.pathname == "/")
           break;
         document.location.pathname = "/";

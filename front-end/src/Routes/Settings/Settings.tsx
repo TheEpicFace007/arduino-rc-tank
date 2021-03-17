@@ -72,19 +72,19 @@ export function Settings() {
       break;
     case "power-setting":
       toRender = (
-        <SettingPage name="Puissences des moteurs" key="puissences-des-moteurs">
-          <SettingSlider default={maxPower} min={0} max={100} step="5" unit="%" label="Puissences des moteurs" onValueChange={onPowerChange} />
-          <SettingSlider default={turnSpeed} min={5} max={50} unit="ms" label="Vitesse a laquel le véhicule va tourné" onValueChange={onTurnSpeedChange} />
+        <SettingPage name="Puissances des moteurs" key="puissances-des-moteurs">
+          <SettingSlider default={maxPower} min={0} max={100} step="5" unit="%" label="Puissances des moteurs" onValueChange={onPowerChange} />
+          <SettingSlider default={turnSpeed} min={5} max={50} unit="ms" label="Vitesse a laquelle le véhicule va tourner" onValueChange={onTurnSpeedChange} />
           <SettingSlider default={accelSpeed} step="5" min={5} max={250} unit="ms" label="Vitesse d'accélération" onValueChange={onAccelSpeedChange}/>
-          <SettingButtons name="Appliqué les changements" onClick={() => onSaveEngineSettings()} />
+          <SettingButtons name="Appliquer les changements" onClick={() => onSaveEngineSettings()} />
         </SettingPage>
       );
       break;
     case "autre":
       toRender = (
         <SettingPage name="Autre" key="autre">
-          <SettingButtons name="Rénitialize toute les reglages" onClick={() => {
-            if (window.confirm("Etes vous sure de vouloir rénitallisé tout les paramètres?")) {
+          <SettingButtons name="Rénitialise tous les réglages" onClick={() => {
+            if (window.confirm("Êtes-vous sûr de vouloir rénitalliser tous les paramètres?")) {
               window.localStorage.clear();
               alert("Rénitialization des reglage fait avec sucesst!")
               window.location.reload();

@@ -166,7 +166,7 @@ export function Drive() {
 
       <main>
         <div className={errorDivClass}>
-          <h2>Vous pouvez uniquement utilisé l'application en mode paysage</h2>
+          <h2>Vous pouvez uniquement utiliser l'application en mode paysage</h2>
         </div>
 
         <div className={controlClass}>

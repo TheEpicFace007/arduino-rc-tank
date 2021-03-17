@@ -13,7 +13,7 @@ export function TopBar(props: TopBarProp)
  
   return (
     <div className="top-bar">
-      <TopBarButton name="Menu principale" onClick={() => window.location.pathname = "/"} icon="home" />
+      <TopBarButton name="Menu principal" onClick={() => window.location.pathname = "/"} icon="home" />
       <BlankTopBarItem />
       {props.children}
     </div>

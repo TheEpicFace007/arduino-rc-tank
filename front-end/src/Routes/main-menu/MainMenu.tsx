@@ -9,7 +9,7 @@ export default function MainMenu()
   document.addEventListener(terminationEvent, (event) => { }, { capture: true });
 
 
-  document.title = "Menu principale";
+  document.title = "Menu principal";
   return (
     <>
       <h1 id="title">Tank 9000 dashboard</h1>
