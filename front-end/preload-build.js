@@ -12,19 +12,24 @@ let fileWithPreloadUnFiltered = [
   splitBy,
 ];
 
+console.log("Preloading script and stylesheets")
+
 links.forEach(link => {
   let fileType = 'script';
 
   if (/\.css$/.test(link)) {
     fileType = 'style';
-    console.log(`Applying preload tag to stylesheet ${link}`)
+    console.log(`Applying preload tag to stylesheet ${link}`);
   }
-  else {
-    if (/\.chun$/.test(link)) {
-      link += "k";
-    }
-    console.log(`Applying preload tag to ${link}`)
+  if (/\.chun$/.test(link)) {
+    link += "k";
   }
+  
+  console.log(`Applying preload tag to ${link}`);
+  if (fileType == "script")
+    link += ".js"
+  else
+    link += ".css"
 
   fileWithPreloadUnFiltered = [
     ...fileWithPreloadUnFiltered,
@@ -37,8 +42,5 @@ fileWithPreloadUnFiltered = [
   ...fileWithPreloadUnFiltered,
   parts[1],
 ];
-
-for 
-
 
 fs.writeFileSync(pathToEntry, fileWithPreloadUnFiltered.join(''));
