@@ -1,15 +1,13 @@
-@import "../../../../node_modules/roboto-sass/scss/roboto.scss";
-
 .setting-page-intro {
   h2 {
-    font-family: "Roboto", "Tahoma", sans-serif;
+    font-family: "Trebuchet MS", "Tahoma", sans-serif;
 
     font-weight: 500;
   }
 }
 
 .setting-page {
-  font-family: "Roboto", "Tahoma", sans-serif;
+  font-family: "Trebuchet MS", "Tahoma", sans-serif;
   // position and size
   width: 80vw;
   margin-top: 20px;
@@ -139,7 +137,7 @@
     input[type="button"] {
       border: 0;
       border-radius: 0.25rem;
-      font-family: "Roboto", "Tahoma", sans-serif;
+      font-family: "Trebuchet MS", "Tahoma", sans-serif;
       font-size: 1rem;
       line-height: 1.2;
       white-space: nowrap;

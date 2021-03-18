@@ -1,0 +1,11 @@
+.pwa-install-popup {
+  z-index: 1;
+}
+
+.pwa-install-popup.dialog-open {
+  display: block;
+}
+
+.pwa-install-popup.dialog-close {
+  display: none;
+}

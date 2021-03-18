@@ -13,22 +13,24 @@
   <p id="info">Tu n'es pas connecté a internet en ce moment. Connecte-toi a internet de l'Arduino pour
     utiliser la manette.
   </p>
-    <p id="desert">🏜️</p>
+  <p id="desert">🏜️</p>
   <style>
     body {
-      background-color: #3E3E3E;
+      background-color: #212121;
       color: #e1e1e1;
       font-family: "Tahoma", sans-serif;
-
       display: flex;
       flex-direction: column;
       align-items: center;
+      user-select: none;
     }
 
     #title {
-      font-size: 3.5em;
-      -webkit-text-stroke: 3px black;
+      font-size: 3.1em;
+      fill: black !important;
       padding: 5px;
+      stroke-width: 12px !important;
+      margin-bottom: 5px;
     }
 
     #info {
@@ -38,9 +40,13 @@
 
     #desert {
       text-align: center;
-      font-size: 110px;
-      margin: 10px;
-      border: 1px solid red;
+      font-size: 100px;
+      margin: 3px;
+      /*border: 1px solid red; */
+    }
+
+    #desert, #info {
+      text-align: center;
     }
   </style>
 </body>

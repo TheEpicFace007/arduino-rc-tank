@@ -39,7 +39,7 @@ export function Menu() {
   const [showInstallPopup, setShowInstallPopup] = useState(false);
 
 
-  function onButtonClick(button: ButtonTitle & string): void {
+  function onButtonClick(button: ButtonTitle): void {
     switch (button) {
       case "Installer l'app":
         alert("Connnecte-toi aux données cellulaires ou a un WI-FI autre que celui de l'Arduino pour voir le tutoriel sur comment installer l'appli");

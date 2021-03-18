@@ -1,6 +1,4 @@
 @import "../../colors.scss";
-@import "~roboto-sass/scss/roboto";
-@import url("https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap");
 
 .menu {
   background-color: #222;
@@ -23,7 +21,7 @@
     height: $size;
     // text
     text-transform: uppercase;
-    font-family: "Roboto", "Tahoma", sans-serif;
+    font-family: "Trebuchet MS", "Tahoma", sans-serif;
     text-align: center;
     font-size: 20px;
     margin: auto;
