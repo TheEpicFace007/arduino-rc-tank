@@ -30,7 +30,6 @@ body {
     font-size: 30px;
     margin: auto;
     background-color: #1e1e1e;
-    
   }
 
   .attr-list {
@@ -38,13 +37,15 @@ body {
     height: 68vh;
 
     .attr-notice {
+      border-bottom: 1px transparentize($color: $border-color, $amount: 0.1) solid;
+
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       .proj-info {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         flex-wrap: wrap;
-        
+
         .proj-link,
         .proj-name {
           margin: 4px;
@@ -59,6 +60,7 @@ body {
           color: #6670f0;
           font-style: italic;
           align-self: flex-end;
+          margin-right: 15px;
 
           a:visited {
             color: #a674d4;
