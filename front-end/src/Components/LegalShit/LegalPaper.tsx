@@ -6,7 +6,7 @@ export default function LegalPaper(props: {
   import("./legal-shit.scss");
   return (
     <div className="legal-paper">
-      <h2>Attribution légal:</h2>
+      <h2>Mentions légal:</h2>
       <div className="attr-list">{props.children}</div>
     </div>
   )
