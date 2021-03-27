@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch, } from 'react-router-dom';
 import { UnknownPage as NotFound } from "./Routes/404/404";
 import { Settings } from "./Routes/Settings/Settings";
 import { Drive } from "./Routes/Drive/Drive";
+import Legal from './Routes/Legal/legal';
 
 // set the config if there's nothing set
 if (!window.localStorage.getItem("max-engine-power"))
@@ -38,6 +39,10 @@ ReactDOM.render(
 
           <Route path="/drive" exact>
             <Drive />
+          </Route>
+
+          <Route path="/legal" exact>
+            <Legal />
           </Route>
 
           <Route path="*" component={NotFound} />
