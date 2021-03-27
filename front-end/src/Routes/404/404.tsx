@@ -1,10 +1,10 @@
 import React from "react";
+import("./404.scss");
 
 
 export function UnknownPage()
 {
   document.title = "Page introuvable";
-  import("./404.scss");
   
   return (
     <>
