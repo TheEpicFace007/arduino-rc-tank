@@ -20,7 +20,6 @@ export function Drive() {
   document.title = "Conduire";
 
   // wait for the page to load before mounting joystick x
-  const SPEEDOMER_SIZE = window.screen.availHeight / 1.8;
   const maxSpeed = parseInt(window.localStorage.getItem("max-engine-power") ?? "CONTROL_TIMEOUT_DURATION");
 
   const [portraitModeError, setPortraitModeError] = useState(getScreenOrientation() == "landscape" ? false : true);
@@ -99,7 +98,7 @@ export function Drive() {
     clearInterval(leftButtonIntervalID as unknown as number ?? NaN);
   }
 
-  // right button
+  // right buttonπ
   function onRightBtnHold() {
     if (rightButtonIsBeingHeld)
       return;
@@ -122,6 +121,7 @@ export function Drive() {
   // const getNeedleSpeed() = 50;
   const RPM_TO_DEC = 10;
   const RPM_TO_INC = 10;
+  const SPEEDOMER_SIZE = 250;
 
   function onUpBtnHold() {
     if (!upButtonIsBeingHeld) {
@@ -154,7 +154,7 @@ export function Drive() {
 
   function onDownBtnRelease() {
     setDownButtonHeld(false);
-    setDownButtonClass("ctrl key-down no-select");
+    setDownButtonClass("ctrl no-select");
     clearInterval(downButtonIntervalID as unknown as number ?? NaN);
   }
   // if ()
@@ -186,7 +186,7 @@ export function Drive() {
           <div className="speedometer no-select">
             <Speedometer
               // sizing
-              height={SPEEDOMER_SIZE} width={SPEEDOMER_SIZE}
+              height={SPEEDOMER_SIZE} width={SPEEDOMER_SIZE} dimensionUnit="%"
               // Colors
               needleColor="grey" textColor="#fff"
               // Variables
@@ -226,6 +226,8 @@ export function Drive() {
               segmentColors={["#414B4F", "#505C61", "#627178", "#6F8087", "#7D9199"]}
               needleTransitionDuration={getNeedleSpeed()} needleTransition={Transition.easeSinInOut}
             />
+
+            <p className="no-select">{getRPMText()}</p>
           </div>
 
           <div className="power-control">
