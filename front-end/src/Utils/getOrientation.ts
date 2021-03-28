@@ -1,12 +1,16 @@
+import { isCompositeComponent } from "react-dom/test-utils";
+
 export type ScreenOrientation = "landscape" | "portrait";
 
-export function getScreenOrientation(): ScreenOrientation
-{
-  if (window.innerHeight > window.innerWidth)
+export function getScreenOrientation(): ScreenOrientation {
+  //@ts-ignore
+  const orientation = (window.screen.orientation || {}).type ;
+  console.log(orientation)
+  if (orientation === "portrait-primary" || orientation === "portrait-secondary")
     return "portrait";
-  else
+  else 
     return "landscape";
 }
 
 //@ts-ignore
-global.getScreenOrientation = getScreenOrientation
+window.getScreenOrientation = getScreenOrientation
