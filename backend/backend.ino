@@ -1,4 +1,6 @@
+// #include <Adafruit_ESP8266.h>
 #include <SPI.h>
+#define ESP8266
 #include <SD.h>
 #if defined(ESP8266)
 #include <ESP8266WiFi.h>
@@ -7,8 +9,8 @@
 #endif
 #include "aWOT.h"
 
-#define WIFI_SSID ""
-#define WIFI_PASSWORD ""
+#define WIFI_SSID "Arduino RC Tank"
+#define WIFI_PASSWORD "rc-tank-password"
 
 // Generate static.bin using awot-scripts and copy it to your SD card
 // You also try it out with this file https://github.com/lasselukkari/aWOT/files/5802036/static.bin.zip
@@ -24,6 +26,7 @@ Application app;
 File dataFile;
 byte readBuffer[READ_BUFFER_SIZE];
 
+// Forward declaration
 uint32_t calculateHash(const char * string, uint32_t value = 0x811C9DC5);
 uint32_t readNumber(uint32_t address);
 void fileHandler(Request &req, Response &res); 
@@ -116,8 +119,12 @@ struct RCTankSocketMessage {
 };
 
 void setup() {
+  // Start the wifi  modem
+  Wifi.SoftAP("Arduino Tank", "password")
+
   Serial.begin(9600);
 
+  // Setup the web server
   if (!SD.begin(SS)) {
     Serial.println("SD card initialization failed.");
     while (true) {}
@@ -129,7 +136,7 @@ void setup() {
     while (true) {}
   }
 
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  WiFi.begin(WIFI_SSID);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
@@ -139,6 +146,9 @@ void setup() {
   app.use(&fileHandler);
 
   server.begin();
+
+  // Setup the websockewt
+  
 }
 
 void loop() {
@@ -221,4 +231,15 @@ bool hasEnumFlag(int enumMember, int flag)
     return true;
   else
     return false;
+}
+
+template<typename T>
+char* struct_to_char(T myStruct)
+{
+  char foo[sizeof(T)];
+
+  T x = myStruct;/* populate */
+
+  memcpy(foo, &x, sizeof x);
+  return foo;
 }
