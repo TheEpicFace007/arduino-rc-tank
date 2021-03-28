@@ -3,7 +3,6 @@ import Speedometer, { CustomSegmentLabelPosition, Transition } from "react-d3-sp
 import { scryRenderedComponentsWithType } from "react-dom/test-utils";
 import { ControllerTopBar } from "../../Components/Topbar/ControllerTopBar";
 import { getScreenOrientation } from "../../Utils/getOrientation";
-import "./Drive.scss";
 // import ReactNipple from "react-nipple";
 
 enum GearSpeed {
@@ -15,10 +14,9 @@ enum GearSpeed {
 };
 
 export function Drive() {
-
+  import("./Drive.scss");
   const terminationEvent = 'onpagehide' in window ? 'pagehide' : 'unload';
   document.addEventListener(terminationEvent, (event) => { }, { capture: true });
-
   document.title = "Conduire";
 
   // wait for the page to load before mounting joystick x
@@ -31,25 +29,27 @@ export function Drive() {
   const [RPM, setRPM] = useState(0);
   const getRPMText = () => `${RPM} rpm`;
   /* left button */
-  const [leftButtonClass, setLeftButtonClass] = useState("ctrl");
+  const [leftButtonClass, setLeftButtonClass] = useState("ctrl no-select");
   const [leftButtonIntervalID, setLeftButtonIntervalID] = useState<NodeJS.Timeout>();
   const [leftButtonIsBeingHeld, setLeftButtonHeld] = useState<boolean>(false);
   /* right button */
-  const [rightButtonClass, setRightButtonClass] = useState("ctrl");
+  const [rightButtonClass, setRightButtonClass] = useState("ctrl no-select");
   const [rightButtonIntervalID, setRightButtonIntervalID] = useState<NodeJS.Timeout>();
   const [rightButtonIsBeingHeld, setRightButtonHeld] = useState<boolean>(false);
   /* up button */
-  const [upButtonClass, setUpButtonClass] = useState("ctrl");
+  const [upButtonClass, setUpButtonClass] = useState("ctrl no-select");
   const [upButtonIntervalID, setUpButtonIntervalID] = useState<NodeJS.Timeout>();
   const [upButtonIsBeingHeld, setUpButtonHeld] = useState<boolean>(false);
   /* down button */
-  const [downButtonClass, setDownButtonClass] = useState("ctrl");
+  const [downButtonClass, setDownButtonClass] = useState("ctrl no-select");
   const [downButtonIntervalID, setDownButtonIntervalID] = useState<NodeJS.Timeout>();
   const [downButtonIsBeingHeld, setDownButtonHeld] = useState<boolean>(false);
 
   const getNeedleSpeed = () => getIntervalDureation(RPM);
 
-
+  setTimeout(() => {
+    document.querySelectorAll("*").forEach((e) => e.classList.add("no-select"))
+  }, 250);
   let didReachedMax;
 
   useEffect(() => {
@@ -67,6 +67,7 @@ export function Drive() {
 
   window.onorientationchange = function () {
     const newState = getScreenOrientation() == "landscape" ? false : true;
+    console.log("window.onorientationchange: ", newState)
     setPortraitModeError(newState);
   };
 
@@ -85,7 +86,7 @@ export function Drive() {
   function onLeftBtnHold() {
     if (!leftButtonIsBeingHeld) {
       setLeftButtonHeld(true);
-      setLeftButtonClass("ctrl key-down");
+      setLeftButtonClass("ctrl no-select key-down");
       setLeftButtonIntervalID(setInterval(() => {
         console.log("left button is being held");
       }, 20));
@@ -94,7 +95,7 @@ export function Drive() {
 
   function onLeftBtnRelease() {
     setLeftButtonHeld(false);
-    setLeftButtonClass("ctrl");
+    setLeftButtonClass("ctrl no-select");
     clearInterval(leftButtonIntervalID as unknown as number ?? NaN);
   }
 
@@ -104,7 +105,7 @@ export function Drive() {
       return;
 
     setRightButtonHeld(true);
-    setRightButtonClass("ctrl key-down");
+    setRightButtonClass("ctrl no-select key-down");
     setRightButtonIntervalID(setInterval(() => {
       console.log("pog");
     }, 20));
@@ -112,7 +113,7 @@ export function Drive() {
 
   function onRightBtnRelease() {
     setRightButtonHeld(false);
-    setRightButtonClass("ctrl");
+    setRightButtonClass("ctrl no-select");
     clearInterval(rightButtonIntervalID as unknown as number ?? NaN);
   }
 
@@ -125,7 +126,7 @@ export function Drive() {
   function onUpBtnHold() {
     if (!upButtonIsBeingHeld) {
       setUpButtonHeld(true);
-      setUpButtonClass("ctrl key-down");
+      setUpButtonClass("ctrl no-select key-down");
       let value = 0;
       setUpButtonIntervalID(setInterval(() => {
         setRPM((RPM) => RPM + RPM_TO_INC);
@@ -136,7 +137,7 @@ export function Drive() {
 
   function onUpBtnRelease() {
     setUpButtonHeld(false);
-    setUpButtonClass("ctrl");
+    setUpButtonClass("ctrl no-select");
     clearInterval(upButtonIntervalID as unknown as number ?? NaN);
   }
 
@@ -144,7 +145,7 @@ export function Drive() {
   function onDownBtnHold() {
     if (!downButtonIsBeingHeld) {
       setDownButtonHeld(true);
-      setDownButtonClass("ctrl key-down");
+      setDownButtonClass("ctrl no-select key-down");
       setDownButtonIntervalID(setInterval(() => {
         setRPM((RPM) => RPM - RPM_TO_DEC);
       }, getNeedleSpeed()));
@@ -153,9 +154,12 @@ export function Drive() {
 
   function onDownBtnRelease() {
     setDownButtonHeld(false);
-    setDownButtonClass("ctrl");
+    setDownButtonClass("ctrl key-down no-select");
     clearInterval(downButtonIntervalID as unknown as number ?? NaN);
   }
+  // if ()
+    // document.requestFullscreen
+    
 
   const fontSize = "1.6em";
   return (
@@ -171,15 +175,15 @@ export function Drive() {
 
         <div className={controlClass}>
           <div className="steer-control">
-            <button className={leftButtonClass} onTouchStart={onLeftBtnHold} onTouchEnd={onLeftBtnRelease}>
-              ⮜
+            <button unselectable="on"  className={leftButtonClass} onTouchStart={onLeftBtnHold} onTouchEnd={onLeftBtnRelease}>
+              &lArr;	
             </button>
-            <button className={rightButtonClass} onTouchStart={onRightBtnHold} onTouchEnd={onRightBtnRelease}>
-              ⮞
+            <button unselectable="on" className={rightButtonClass} onTouchStart={onRightBtnHold} onTouchEnd={onRightBtnRelease}>
+              &rArr;
             </button>
           </div>
 
-          <div className="speedometer">
+          <div className="speedometer no-select">
             <Speedometer
               // sizing
               height={SPEEDOMER_SIZE} width={SPEEDOMER_SIZE}
@@ -225,11 +229,11 @@ export function Drive() {
           </div>
 
           <div className="power-control">
-            <button className={upButtonClass} onTouchStart={onUpBtnHold}  onTouchEnd={onUpBtnRelease}>
-              ⮝
+            <button unselectable="on" className={upButtonClass} onTouchStart={onUpBtnHold}  onTouchEnd={onUpBtnRelease}>
+              &uArr;
             </button>
-            <button className={downButtonClass} onTouchStart={onDownBtnHold} onTouchEnd={onDownBtnRelease}>
-              ⮟
+            <button unselectable="on" className={downButtonClass} onTouchStart={onDownBtnHold} onTouchEnd={onDownBtnRelease}>
+              &dArr;
             </button>
           </div>
         </div>
