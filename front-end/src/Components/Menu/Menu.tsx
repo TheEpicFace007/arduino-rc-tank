@@ -43,9 +43,7 @@ export function Menu() {
   function onButtonClick(button: ButtonTitle): void {
     switch (button) {
       case "Installer l'app":
-        alert("Connnecte-toi aux données cellulaires ou a un WI-FI autre que celui de l'Arduino pour voir le tutoriel sur comment installer l'appli");
-        window.open("https://mobilesyrup.com/2020/05/24/how-install-progressive-web-app-pwa-android-ios-pc-mac", undefined,
-                    "blabla, height=480, width=640, resizable=off"); // osti que chu lazy tabarnack
+        document.location.pathname = "/install"
         break;
       case "Conduire":
         if (document.location.pathname == "/drive")

@@ -1,0 +1,33 @@
+.instruction {
+  font-family: Helvetica, Arial, sans-serif;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+
+  h2, h3 { font-weight: 600 !important; }
+  h3 {
+    border-bottom: solid 1px;
+    margin-bottom: 5px;
+  }
+  
+  
+
+  img {
+    width: 95%;
+    height: auto;
+    align-self: center;
+    margin: 10px;
+  }
+}
+
+.android-instruction {
+  h3 {
+    border-bottom-color: #3DDC84;
+  }
+}
+
+.ios-instruction {
+  h3 {
+    border-bottom-color: #7d7d7d;
+  }
+}

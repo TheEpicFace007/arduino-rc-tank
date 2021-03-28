@@ -7,6 +7,7 @@ import { UnknownPage as NotFound } from "./Routes/404/404";
 import { Settings } from "./Routes/Settings/Settings";
 import { Drive } from "./Routes/Drive/Drive";
 import Legal from './Routes/Legal/legal';
+import { Install } from './Routes/Install/Install';
 
 // set the config if there's nothing set
 if (!window.localStorage.getItem("max-engine-power"))
@@ -43,6 +44,10 @@ ReactDOM.render(
 
           <Route path="/legal" exact>
             <Legal />
+          </Route>
+
+          <Route path="/install" exact>
+            <Install />
           </Route>
 
           <Route path="*" component={NotFound} />
