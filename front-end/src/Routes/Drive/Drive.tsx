@@ -22,7 +22,7 @@ export function Drive() {
   // wait for the page to load before mounting joystick x
   const maxSpeed = parseInt(window.localStorage.getItem("max-engine-power") ?? "CONTROL_TIMEOUT_DURATION");
 
-  const [portraitModeError, setPortraitModeError] = useState(getScreenOrientation() == "landscape" ? false : true);
+  const [showPortraitModeError, setShowPortraitModeError] = useState(getScreenOrientation() == "landscape" ? false : true);
   const [errorDivClass, setErrorDivClass] = useState("portrait-mode-error");
   const [controlClass, setControlClass] = useState<string>("");
   const [RPM, setRPM] = useState(0);
@@ -65,13 +65,17 @@ export function Drive() {
   }, [RPM]);
 
   window.onorientationchange = function () {
-    const newState = getScreenOrientation() == "landscape" ? false : true;
-    console.log("window.onorientationchange: ", newState)
-    setPortraitModeError(newState);
+    const newOrientation = getScreenOrientation();
+    if (newOrientation === "landscape")
+      setShowPortraitModeError(false);
+    else
+      setShowPortraitModeError(true);
+
+    console.log(newOrientation)
   };
 
   useEffect(() => {
-    if (portraitModeError) {
+    if (showPortraitModeError) {
       setErrorDivClass("portrait-mode-error");
       setControlClass("controls hidden");
     }
@@ -79,7 +83,7 @@ export function Drive() {
       setErrorDivClass("portrait-mode-error" + " hidden");
       setControlClass("controls");
     }
-  }, [portraitModeError]);
+  }, [showPortraitModeError]);
 
   // left button
   function onLeftBtnHold() {
@@ -227,7 +231,7 @@ export function Drive() {
               needleTransitionDuration={getNeedleSpeed()} needleTransition={Transition.easeSinInOut}
             />
 
-            <p className="no-select">{getRPMText()}</p>
+            {/* <p className="no-select">{getRPMText()}</p> */}
           </div>
 
           <div className="power-control">

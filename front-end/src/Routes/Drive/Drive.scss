@@ -18,123 +18,138 @@ main {
   }
 
   .hidden {
-    display: none !important;
+    //display: none !important;
+  }
+  @media (orientation: landscape) {
+      
+    .portrait-mode-error {
+      display: none;
+    }
+    .controls {
+      //background: #282828;
+      //height: 80vh;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      width: 96vw;
+
+      .steer-control,
+      .power-control {
+        flex-basis: 30%;
+        align-self: center;
+        display: flex;
+        justify-content: space-around;
+        height: 40% !important;
+
+        @keyframes onTouchReleaseAnimation {
+          from {
+            box-shadow: -3px 5px 10px 0px #6f6f6f;
+          }
+          to {
+            box-shadow: 0px 1px 10px 0px #6f6f6f;
+          }
+        }
+
+        @keyframes onTouchAnimation {
+          from {
+            box-shadow: 0px 1px 10px 0px #6f6f6f;
+          }
+          to {
+            box-shadow: -3px 5px 10px 0px #6f6f6f;
+          }
+        }
+
+        $anim-duration: 60ms;
+
+        button {
+          $size: 64px;
+          height: $size;
+          width: $size;
+          font-size: 2em;
+
+          background-color: #262626;
+          color: #eee;
+          border: 2px #808080 solid;
+          border-radius: 10px;
+          outline: none;
+
+          margin: 0 12px;
+
+          animation-name: onTouchAnimation;
+          animation-duration: $anim-duration;
+          animation-direction: normal;
+          animation-timing-function: cubic-bezier(0.55, 0.09, 0.68, 0.53);
+          animation-fill-mode: forwards;
+          @include remove-button-style();
+
+          ::selection {
+            opacity: none;
+          }
+          
+          // box-shadow: -3px 5px 10px 0px #6f6f6f;
+        }
+
+        button.key-down {
+          animation-name: onTouchReleaseAnimation;
+          animation-duration: $anim-duration;
+          animation-direction: normal;
+          animation-timing-function: cubic-bezier(0.55, 0.09, 0.68, 0.53);
+          animation-fill-mode: backwards;
+        }
+      }
+
+      .steer-control {
+        flex-direction: row;
+
+        button {
+          width: 100px;
+          height: 65px;
+        }
+      }
+
+      .power-control {
+        flex-direction: column;
+        align-items: center;
+
+        button {
+          margin: 10px;
+          height: 115px;
+          width:  100px;
+        }
+      }
+
+      .speedometer {
+        flex-basis: 40%;
+        text {
+          font-family: "Trebuchet MS", "Tahoma", sans-serif;
+        }
+
+        text.segment-value {
+          stroke: #262c2e;
+          stroke-width: 0.3mm;
+        }
+
+        text.current-value {
+          letter-spacing: 1px;
+          font-size: 1.5em !important;
+          ::selection {
+            fill-opacity: 0;
+            // block-opacity: 1;  
+          }
+        }
+      }
+    }
   }
 
-  .controls {
-    //background: #282828;
-    //height: 80vh;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    width: 96vw;
-
-    .steer-control,
-    .power-control {
-      flex-basis: 30%;
-      align-self: center;
-      display: flex;
-      justify-content: space-around;
-      height: 40% !important;
-
-      @keyframes onTouchReleaseAnimation {
-        from {
-          box-shadow: -3px 5px 10px 0px #6f6f6f;
-        }
-        to {
-          box-shadow: 0px 1px 10px 0px #6f6f6f;
-        }
-      }
-
-      @keyframes onTouchAnimation {
-        from {
-          box-shadow: 0px 1px 10px 0px #6f6f6f;
-        }
-        to {
-          box-shadow: -3px 5px 10px 0px #6f6f6f;
-        }
-      }
-
-      $anim-duration: 60ms;
-
-      button {
-        $size: 64px;
-        height: $size;
-        width: $size;
-        font-size: 2em;
-
-        background-color: #262626;
-        color: #eee;
-        border: 2px #808080 solid;
-        border-radius: 10px;
-        outline: none;
-
-        margin: 0 12px;
-
-        animation-name: onTouchAnimation;
-        animation-duration: $anim-duration;
-        animation-direction: normal;
-        animation-timing-function: cubic-bezier(0.55, 0.09, 0.68, 0.53);
-        animation-fill-mode: forwards;
-        @include remove-button-style();
-
-        ::selection {
-          opacity: none;
-        }
-        
-        // box-shadow: -3px 5px 10px 0px #6f6f6f;
-      }
-
-      button.key-down {
-        animation-name: onTouchReleaseAnimation;
-        animation-duration: $anim-duration;
-        animation-direction: normal;
-        animation-timing-function: cubic-bezier(0.55, 0.09, 0.68, 0.53);
-        animation-fill-mode: backwards;
-      }
+  @media (orientation: portrait) {
+    .controls {
+      display: none;
     }
 
-    .steer-control {
-      flex-direction: row;
-
-      button {
-        width: 100px;
-        height: 65px;
-      }
-    }
-
-    .power-control {
-      flex-direction: column;
-      align-items: center;
-
-      button {
-        margin: 10px;
-        height: 115px;
-        width:  100px;
-      }
-    }
-
-    .speedometer {
-      flex-basis: 40%;
-      text {
-        font-family: "Trebuchet MS", "Tahoma", sans-serif;
-      }
-
-      text.segment-value {
-        stroke: #262c2e;
-        stroke-width: 0.3mm;
-      }
-
-      text.current-value {
-        letter-spacing: 1px;
-        font-size: 1.5em !important;
-        ::selection {
-          fill-opacity: 0;
-          // block-opacity: 1;  
-        }
-      }
+    .portrait-mode-error {
+      display: block;
     }
   }
 }
