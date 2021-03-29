@@ -5,7 +5,6 @@ export type ScreenOrientation = "landscape" | "portrait";
 export function getScreenOrientation(): ScreenOrientation {
   //@ts-ignore
   const orientation = (window.screen.orientation || {}).type ;
-  console.log(orientation)
   if (orientation === "portrait-primary" || orientation === "portrait-secondary")
     return "portrait";
   else 

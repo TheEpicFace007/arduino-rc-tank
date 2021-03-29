@@ -3,6 +3,7 @@ import Speedometer, { CustomSegmentLabelPosition, Transition } from "react-d3-sp
 import { scryRenderedComponentsWithType } from "react-dom/test-utils";
 import { ControllerTopBar } from "../../Components/Topbar/ControllerTopBar";
 import { getScreenOrientation } from "../../Utils/getOrientation";
+import { SocketHelper } from "../../SocketHelper";
 // import ReactNipple from "react-nipple";
 
 enum GearSpeed {
@@ -13,6 +14,7 @@ enum GearSpeed {
   Gear5 = 70
 };
 
+let arduinoWebsocket = new WebSocket(`ws://${SocketHelper.LocalArduinoIP}:${SocketHelper.WebsocketPort}`);
 export function Drive() {
   import("./Drive.scss");
   const terminationEvent = 'onpagehide' in window ? 'pagehide' : 'unload';
@@ -21,6 +23,25 @@ export function Drive() {
 
   // wait for the page to load before mounting joystick x
   const maxSpeed = parseInt(window.localStorage.getItem("max-engine-power") ?? "CONTROL_TIMEOUT_DURATION");
+
+  useEffect(() => {
+    switch (arduinoWebsocket.readyState) {
+      case WebSocket.CLOSED:
+        console.log("WebSocket.CLOSED")
+        // Try to reconnect
+        arduinoWebsocket = new WebSocket(`ws://${SocketHelper.LocalArduinoIP}:${SocketHelper.WebsocketPort}`);
+        break;
+      case WebSocket.CLOSING:
+        console.log("WebSocket.CLOSING")
+        break;
+      case WebSocket.CONNECTING:
+        console.log("WebSocket.CONNECTING")
+        break;
+      case WebSocket.OPEN:
+        console.log("WebSocket.OPEN")
+        break;
+    }
+  }, [arduinoWebsocket.readyState]);
 
   const [showPortraitModeError, setShowPortraitModeError] = useState(getScreenOrientation() == "landscape" ? false : true);
   const [errorDivClass, setErrorDivClass] = useState("portrait-mode-error");
@@ -45,11 +66,15 @@ export function Drive() {
   const [downButtonIsBeingHeld, setDownButtonHeld] = useState<boolean>(false);
 
   const getNeedleSpeed = () => getIntervalDureation(RPM);
+  const noButtonAreBeingHeld = () => !upButtonIntervalID && !leftButtonIsBeingHeld && !rightButtonIsBeingHeld && !downButtonIntervalID;
 
   setTimeout(() => {
     document.querySelectorAll("*").forEach((e) => e.classList.add("no-select"))
   }, 250);
   let didReachedMax;
+
+
+ 
 
   useEffect(() => {
 
@@ -162,8 +187,8 @@ export function Drive() {
     clearInterval(downButtonIntervalID as unknown as number ?? NaN);
   }
   // if ()
-    // document.requestFullscreen
-    
+  // document.requestFullscreen
+
 
   const fontSize = "1.6em";
   return (
@@ -179,8 +204,8 @@ export function Drive() {
 
         <div className={controlClass}>
           <div className="steer-control">
-            <button unselectable="on"  className={leftButtonClass} onTouchStart={onLeftBtnHold} onTouchEnd={onLeftBtnRelease}>
-              &lArr;	
+            <button unselectable="on" className={leftButtonClass} onTouchStart={onLeftBtnHold} onTouchEnd={onLeftBtnRelease}>
+              &lArr;
             </button>
             <button unselectable="on" className={rightButtonClass} onTouchStart={onRightBtnHold} onTouchEnd={onRightBtnRelease}>
               &rArr;
@@ -235,7 +260,7 @@ export function Drive() {
           </div>
 
           <div className="power-control">
-            <button unselectable="on" className={upButtonClass} onTouchStart={onUpBtnHold}  onTouchEnd={onUpBtnRelease}>
+            <button unselectable="on" className={upButtonClass} onTouchStart={onUpBtnHold} onTouchEnd={onUpBtnRelease}>
               &uArr;
             </button>
             <button unselectable="on" className={downButtonClass} onTouchStart={onDownBtnHold} onTouchEnd={onDownBtnRelease}>

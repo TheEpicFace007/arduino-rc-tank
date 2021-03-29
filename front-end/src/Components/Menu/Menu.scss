@@ -1,6 +1,13 @@
 @import "../../colors.scss";
 
+@media (orientation: portrait) {
+  .menu {
+    flex-wrap: wrap;
+  }
+}
+
 .menu {
+  //animation: rgb 1500ms infinite cubic-bezier(0, 0, 0.2, 1) alternate both;
   background-color: #222;
   color: white;
   display: flex;
@@ -8,7 +15,7 @@
   // flex box
   flex-direction: row;
   justify-content: space-evenly;
-  flex-wrap: wrap;
+
   flex-basis: content;
 
   width: 100vw;
