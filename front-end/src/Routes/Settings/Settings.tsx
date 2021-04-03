@@ -49,15 +49,18 @@ export function Settings() {
   let maxPower: number = parseInt(window.localStorage.getItem("max-engine-power") ?? "100") ?? 100;
   let turnSpeed: number = parseInt(window.localStorage.getItem("turn-speed") ?? "20") ?? 20;
   let accelSpeed = parseInt(window.localStorage.getItem("accel-speed") ?? "50") ?? 50;
+  let reverseSpeed = parseInt(localStorage.getItem("reverse-speed") ?? "50") ?? 50;
 
   const onPowerChange = (power: number) => maxPower = power;
   const onTurnSpeedChange = (speed: number) => turnSpeed = speed;
   const onAccelSpeedChange = (speed: number) => accelSpeed = speed;
+  const onReverseSpeedChange = (speed: number) => reverseSpeed = speed;
 
   function onSaveEngineSettings(): void {
     window.localStorage.setItem("max-engine-power", maxPower.toString());
     window.localStorage.setItem("turn-speed", turnSpeed.toString());
     window.localStorage.setItem("accel-speed", accelSpeed.toString());
+    window.localStorage.setItem("reverse-speed", reverseSpeed.toString());
   }
 
   let toRender: JSX.Element;
@@ -75,7 +78,8 @@ export function Settings() {
         <SettingPage name="Puissances des moteurs" key="puissances-des-moteurs">
           <SettingSlider default={maxPower} min={0} max={100} step="5" unit="%" label="Puissances des moteurs" onValueChange={onPowerChange} />
           <SettingSlider default={turnSpeed} min={5} max={50} unit="ms" label="Vitesse a laquelle le véhicule va tourner" onValueChange={onTurnSpeedChange} />
-          <SettingSlider default={accelSpeed} step="5" min={5} max={250} unit="ms" label="Vitesse d'accélération" onValueChange={onAccelSpeedChange}/>
+          <SettingSlider default={accelSpeed} step="5" min={5} max={250} unit="ms" label="Vitesse d'accélération" onValueChange={onAccelSpeedChange} />
+          <SettingSlider default={reverseSpeed} step="5" min={5} max={250} unit="ms" label="Vitesse de décélaration" onValueChange={onReverseSpeedChange} />
           <SettingButtons name="Appliquer les changements" onClick={() => onSaveEngineSettings()} />
         </SettingPage>
       );

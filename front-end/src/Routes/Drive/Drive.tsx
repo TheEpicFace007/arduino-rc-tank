@@ -72,6 +72,9 @@ export function Drive() {
 
   const [cruiseControlEnabled, setCruiseControlEnable] = useState(false);
   const [cruiseControlIconColor, setCruiseControlColor] = useState("#a1a1a1")
+
+  const reverseSpeed = parseInt(localStorage.getItem("reverse-speed") ?? "50") ?? 50;
+
   useEffect(() => {
     if (cruiseControlEnabled) {
       setCruiseControlColor("#fff")
@@ -164,8 +167,8 @@ export function Drive() {
   // up button
   let speed = 0;
   // const getNeedleSpeed() = 50;
-  const RPM_TO_DEC = 10;
-  const RPM_TO_INC = 10;
+  const RPM_TO_DEC = reverseSpeed;
+  const RPM_TO_INC = getNeedleSpeed();
   const SPEEDOMER_SIZE = 250;
 
   function onUpBtnHold() {
@@ -193,7 +196,7 @@ export function Drive() {
       setDownButtonClass("ctrl no-select key-down");
       setDownButtonIntervalID(setInterval(() => {
         setRPM((RPM) => RPM - RPM_TO_DEC);
-      }, getNeedleSpeed()));
+      }, RPM_TO_DEC));
       setCruiseControlEnable(false);
     }
   }
@@ -203,6 +206,7 @@ export function Drive() {
     setDownButtonClass("ctrl no-select");
     clearInterval(downButtonIntervalID as unknown as number ?? NaN);
     setCruiseControlEnable(false);
+    
   }
   // if ()
   // document.requestFullscreen'
