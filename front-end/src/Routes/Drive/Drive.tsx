@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Speedometer, { CustomSegmentLabelPosition, Transition } from "react-d3-speedometer";
 import { scryRenderedComponentsWithType } from "react-dom/test-utils";
-import { ControllerTopBar } from "../../Components/Topbar/ControllerTopBar";
+import { ControllerTopBar, ControllerTopBarItem } from "../../Components/Topbar/ControllerTopBar";
 import { getScreenOrientation } from "../../Utils/getOrientation";
 import { SocketHelper } from "../../SocketHelper";
+import { TopBarButton } from "../../Components/Topbar/TopBarButton";
+import { TopBar } from "../../Components/Topbar/TopBar";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTachometerAlt } from "@fortawesome/free-solid-svg-icons";
 // import ReactNipple from "react-nipple";
 
 enum GearSpeed {
@@ -64,6 +68,17 @@ export function Drive() {
   const [downButtonClass, setDownButtonClass] = useState("ctrl no-select");
   const [downButtonIntervalID, setDownButtonIntervalID] = useState<NodeJS.Timeout>();
   const [downButtonIsBeingHeld, setDownButtonHeld] = useState<boolean>(false);
+  
+  const [cruiseControlEnabled, setCruiseControlEnable] = useState(false);
+  const [cruiseControlIconColor, setCruiseControlColor] = useState("#636363")
+  useEffect(() => {
+    if (cruiseControlEnabled) {
+      setCruiseControlColor("#fff")
+    }
+    else {
+      setCruiseControlColor("#a1a1a1")
+    }
+  }, [cruiseControlEnabled])
 
   const getNeedleSpeed = () => getIntervalDureation(RPM);
   const noButtonAreBeingHeld = () => !upButtonIntervalID && !leftButtonIsBeingHeld && !rightButtonIsBeingHeld && !downButtonIntervalID;
@@ -72,9 +87,6 @@ export function Drive() {
     document.querySelectorAll("*").forEach((e) => e.classList.add("no-select"))
   }, 250);
   let didReachedMax;
-
-
- 
 
   useEffect(() => {
 
@@ -187,14 +199,22 @@ export function Drive() {
     clearInterval(downButtonIntervalID as unknown as number ?? NaN);
   }
   // if ()
-  // document.requestFullscreen
+  // document.requestFullscreen'
+  library.add(faTachometerAlt)
+  const CONTROLLER_TOP_BAR_ITEMS: ControllerTopBarItem[] =
+    [
+      {icon: "tachometer-alt", name: "Cruise control", onClick: () => setCruiseControlEnable(!cruiseControlEnabled), color: cruiseControlIconColor }
+    ];
 
 
   const fontSize = "1.6em";
   return (
     <>
       <header>
-        <ControllerTopBar />
+      <TopBar>
+        {CONTROLLER_TOP_BAR_ITEMS.map((item) => <TopBarButton name={item.name} icon={item.icon}
+          key={item.name} onClick={item.onClick} color={cruiseControlIconColor}/>)}
+      </TopBar>
       </header>
 
       <main>

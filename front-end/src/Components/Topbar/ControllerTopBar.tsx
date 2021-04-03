@@ -10,6 +10,7 @@ export type ControllerTopBarItem = {
   name: string,
   icon: IconProp,
   onClick: () => void;
+  color?: string;
 };
 interface ControllerTopBarProps {
   children?: JSX.Element | JSX.Element[];
