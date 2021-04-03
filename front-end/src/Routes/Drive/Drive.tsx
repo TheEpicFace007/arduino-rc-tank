@@ -26,7 +26,8 @@ export function Drive() {
   document.title = "Conduire";
 
   // wait for the page to load before mounting joystick x
-  const maxSpeed = parseInt(window.localStorage.getItem("max-engine-power") ?? "CONTROL_TIMEOUT_DURATION");
+  const maxSpeed = (parseInt(window.localStorage.getItem("max-engine-power") ?? "CONTROL_TIMEOUT_DURATION")) * 10;
+  console.log(maxSpeed)
 
   useEffect(() => {
     switch (arduinoWebsocket.readyState) {
@@ -97,6 +98,9 @@ export function Drive() {
     }
     else if (RPM > 1000) {
       setRPM(1000);
+    }
+    else if (RPM > maxSpeed) {
+      setRPM(maxSpeed)
     }
     //setCurrentRPMText(`RPM: ${RPM}`);
   }, [RPM]);

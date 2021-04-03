@@ -16,6 +16,7 @@ if (!window.localStorage.getItem("turn-speed"))
   window.localStorage.setItem("turn-speed", "20");
 if (!window.localStorage.getItem("accel-speed"))
   window.localStorage.setItem("accel-speed", "50");
+// if (!window.localStorage.setItem("max"))
 
 // register the service worker
 if ("serviceWorker" in navigator) {

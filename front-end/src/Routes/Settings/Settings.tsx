@@ -43,7 +43,7 @@ export function Settings() {
         setPreviousSettingPage(activeSettingPage);
         setActiveSettingPage("autre")
       }
-    }
+    },
   ];
 
   let maxPower: number = parseInt(window.localStorage.getItem("max-engine-power") ?? "100") ?? 100;
