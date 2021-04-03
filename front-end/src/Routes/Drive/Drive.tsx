@@ -68,9 +68,9 @@ export function Drive() {
   const [downButtonClass, setDownButtonClass] = useState("ctrl no-select");
   const [downButtonIntervalID, setDownButtonIntervalID] = useState<NodeJS.Timeout>();
   const [downButtonIsBeingHeld, setDownButtonHeld] = useState<boolean>(false);
-  
+
   const [cruiseControlEnabled, setCruiseControlEnable] = useState(false);
-  const [cruiseControlIconColor, setCruiseControlColor] = useState("#636363")
+  const [cruiseControlIconColor, setCruiseControlColor] = useState("#a1a1a1")
   useEffect(() => {
     if (cruiseControlEnabled) {
       setCruiseControlColor("#fff")
@@ -190,6 +190,7 @@ export function Drive() {
       setDownButtonIntervalID(setInterval(() => {
         setRPM((RPM) => RPM - RPM_TO_DEC);
       }, getNeedleSpeed()));
+      setCruiseControlEnable(false);
     }
   }
 
@@ -197,13 +198,14 @@ export function Drive() {
     setDownButtonHeld(false);
     setDownButtonClass("ctrl no-select");
     clearInterval(downButtonIntervalID as unknown as number ?? NaN);
+    setCruiseControlEnable(false);
   }
   // if ()
   // document.requestFullscreen'
   library.add(faTachometerAlt)
   const CONTROLLER_TOP_BAR_ITEMS: ControllerTopBarItem[] =
     [
-      {icon: "tachometer-alt", name: "Cruise control", onClick: () => setCruiseControlEnable(!cruiseControlEnabled), color: cruiseControlIconColor }
+      { icon: "tachometer-alt", name: "Cruise control", onClick: () => setCruiseControlEnable(!cruiseControlEnabled), color: cruiseControlIconColor }
     ];
 
 
@@ -211,10 +213,10 @@ export function Drive() {
   return (
     <>
       <header>
-      <TopBar>
-        {CONTROLLER_TOP_BAR_ITEMS.map((item) => <TopBarButton name={item.name} icon={item.icon}
-          key={item.name} onClick={item.onClick} color={cruiseControlIconColor}/>)}
-      </TopBar>
+        <TopBar>
+          {CONTROLLER_TOP_BAR_ITEMS.map((item) => <TopBarButton name={item.name} icon={item.icon}
+            key={item.name} onClick={item.onClick} color={cruiseControlIconColor} />)}
+        </TopBar>
       </header>
 
       <main>
