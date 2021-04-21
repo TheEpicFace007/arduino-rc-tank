@@ -4,6 +4,12 @@
   appearance: none;
 }
 
+header {
+  .top-bar-btn svg {
+    transition: all 190ms cubic-bezier(0.39, 0.58, 0.57, 1);
+  }
+}
+
 body {
   overflow: hidden;
 }
