@@ -7,7 +7,8 @@ import { SocketHelper } from "../../SocketHelper";
 import { TopBarButton } from "../../Components/Topbar/TopBarButton";
 import { TopBar } from "../../Components/Topbar/TopBar";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTachometerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCaretSquareDown, faTachometerAlt } from "@fortawesome/free-solid-svg-icons";
+import { kMaxLength } from "buffer";
 // import ReactNipple from "react-nipple";
 
 enum GearSpeed {
@@ -73,6 +74,9 @@ export function Drive() {
   const [cruiseControlEnabled, setCruiseControlEnable] = useState(false);
   const [cruiseControlIconColor, setCruiseControlColor] = useState("#a1a1a1")
 
+  const [reverseEnabled, setReverseEnabled] = useState(false)
+  const [reverseIconColor, setReverseIconColor] = useState("#a1a1a1");
+
   const reverseSpeed = parseInt(localStorage.getItem("reverse-speed") ?? "50") ?? 50;
 
   useEffect(() => {
@@ -83,6 +87,15 @@ export function Drive() {
       setCruiseControlColor("#a1a1a1")
     }
   }, [cruiseControlEnabled])
+
+  useEffect(() => {
+    if (reverseEnabled) {
+      setReverseIconColor("#fff")
+    }
+    else {
+      setReverseIconColor("#a1a1a1")
+    }
+  }, [reverseEnabled])
 
   const getNeedleSpeed = () => getIntervalDureation(RPM);
   const noButtonAreBeingHeld = () => !upButtonIntervalID && !leftButtonIsBeingHeld && !rightButtonIsBeingHeld && !downButtonIntervalID;
@@ -177,7 +190,7 @@ export function Drive() {
       setUpButtonClass("ctrl no-select key-down");
       let value = 0;
       setUpButtonIntervalID(setInterval(() => {
-        setRPM((RPM) => RPM + RPM_TO_INC);
+        setRPM((RPM) => RPM + 20);
         //console.debug("Changed RPM: ", RPM);
       }, getNeedleSpeed()));
     }
@@ -195,7 +208,7 @@ export function Drive() {
       setDownButtonHeld(true);
       setDownButtonClass("ctrl no-select key-down");
       setDownButtonIntervalID(setInterval(() => {
-        setRPM((RPM) => RPM - RPM_TO_DEC);
+        setRPM((RPM) => RPM - 20);
       }, RPM_TO_DEC));
       setCruiseControlEnable(false);
     }
@@ -206,14 +219,15 @@ export function Drive() {
     setDownButtonClass("ctrl no-select");
     clearInterval(downButtonIntervalID as unknown as number ?? NaN);
     setCruiseControlEnable(false);
-    
+
   }
   // if ()
   // document.requestFullscreen'
-  library.add(faTachometerAlt)
+  library.add(faTachometerAlt, faCaretSquareDown)
   const CONTROLLER_TOP_BAR_ITEMS: ControllerTopBarItem[] =
     [
-      { icon: "tachometer-alt", name: "Cruise control", onClick: () => setCruiseControlEnable(!cruiseControlEnabled), color: cruiseControlIconColor }
+      { icon: "tachometer-alt", name: "Cruise control", onClick: () => setCruiseControlEnable(!cruiseControlEnabled), color: cruiseControlIconColor, key: "cruise-control" },
+      { icon: "caret-square-down", name: "Reverse", onClick: () => setReverseEnabled(!reverseEnabled), color: reverseIconColor, key: "reverse-car" }
     ];
 
 
@@ -222,8 +236,20 @@ export function Drive() {
     <>
       <header>
         <TopBar>
-          {CONTROLLER_TOP_BAR_ITEMS.map((item) => <TopBarButton name={item.name} icon={item.icon}
-            key={item.name} onClick={item.onClick} color={cruiseControlIconColor} />)}
+            <TopBarButton
+              name="Cruise control"
+              icon="tachometer-alt"
+              key="cruise control"
+              onClick={() => setCruiseControlEnable(!cruiseControlEnabled)}
+              color={cruiseControlIconColor}
+            />
+          <TopBarButton
+            name="Reverse"
+            icon="caret-square-down"
+            onClick={() => setReverseEnabled(!reverseEnabled)}
+            color={reverseIconColor}
+            key="reverse car button"
+          />
         </TopBar>
       </header>
 
