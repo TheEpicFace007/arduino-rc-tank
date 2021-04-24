@@ -19,7 +19,6 @@ enum GearSpeed {
   Gear5 = 70
 };
 
-let arduinoWebsocket = new WebSocket(`ws://${SocketHelper.LocalArduinoIP}:${SocketHelper.WebsocketPort}`);
 export function Drive() {
   import("./Drive.scss");
   const terminationEvent = 'onpagehide' in window ? 'pagehide' : 'unload';
@@ -29,25 +28,6 @@ export function Drive() {
   // wait for the page to load before mounting joystick x
   const maxSpeed = (parseInt(window.localStorage.getItem("max-engine-power") ?? "CONTROL_TIMEOUT_DURATION")) * 10;
   console.log(maxSpeed)
-
-  useEffect(() => {
-    switch (arduinoWebsocket.readyState) {
-      case WebSocket.CLOSED:
-        console.log("WebSocket.CLOSED")
-        // Try to reconnect
-        arduinoWebsocket = new WebSocket(`ws://${SocketHelper.LocalArduinoIP}:${SocketHelper.WebsocketPort}`);
-        break;
-      case WebSocket.CLOSING:
-        console.log("WebSocket.CLOSING")
-        break;
-      case WebSocket.CONNECTING:
-        console.log("WebSocket.CONNECTING")
-        break;
-      case WebSocket.OPEN:
-        console.log("WebSocket.OPEN")
-        break;
-    }
-  }, [arduinoWebsocket.readyState]);
 
   const [showPortraitModeError, setShowPortraitModeError] = useState(getScreenOrientation() == "landscape" ? false : true);
   const [errorDivClass, setErrorDivClass] = useState("portrait-mode-error");
