@@ -81,7 +81,7 @@ export function Drive() {
   const noButtonAreBeingHeld = () => !upButtonIntervalID && !leftButtonIsBeingHeld && !rightButtonIsBeingHeld && !downButtonIntervalID;
 
   setTimeout(() => {
-    document.querySelectorAll("*").forEach((e) => e.classList.add("no-select"))
+    document.querySelectorAll("*").forEach(e => e.classList.add("no-select"))
   }, 250);
   let didReachedMax;
 
@@ -121,6 +121,29 @@ export function Drive() {
       setControlClass("controls");
     }
   }, [showPortraitModeError]);
+
+  // adjust screen size
+  const width = window.screen.availWidth
+  let protoSpeedoSize = 250
+  /* if (width <= 568) 
+    protoSpeedoSize = 180
+  else if (width <= 667)
+    protoSpeedoSize = 230
+  else if (width <= 640)
+    protoSpeedoSize = 250;
+  else if (width <= 736)
+    protoSpeedoSize = 325
+  else if (width <= 812)
+    protoSpeedoSize = 320;
+  else if (width <= 1200)
+    protoSpeedoSize = 400
+  else if (width <= 1400)
+    protoSpeedoSize = 500
+  else */
+    protoSpeedoSize = width / 2.75
+  
+  const [speedometerSize, setSpeedometerSize] = useState(protoSpeedoSize)
+  
 
   // left button
   function onLeftBtnHold() {
@@ -162,7 +185,6 @@ export function Drive() {
   // const getNeedleSpeed() = 50;
   const RPM_TO_DEC = reverseSpeed;
   const RPM_TO_INC = getNeedleSpeed();
-  const SPEEDOMER_SIZE = 250;
 
   function onUpBtnHold() {
     if (!upButtonIsBeingHeld) {
@@ -204,11 +226,11 @@ export function Drive() {
   // if ()
   // document.requestFullscreen'
   library.add(faTachometerAlt, faCaretSquareDown)
-  const CONTROLLER_TOP_BAR_ITEMS: ControllerTopBarItem[] =
+ /*  const CONTROLLER_TOP_BAR_ITEMS: ControllerTopBarItem[] =
     [
       { icon: "tachometer-alt", name: "Cruise control", onClick: () => setCruiseControlEnable(!cruiseControlEnabled), color: cruiseControlIconColor, key: "cruise-control" },
       { icon: "caret-square-down", name: "Reverse", onClick: () => setReverseEnabled(!reverseEnabled), color: reverseIconColor, key: "reverse-car" }
-    ];
+    ]; */
 
 
   const fontSize = "1.6em";
@@ -251,7 +273,7 @@ export function Drive() {
           <div className="speedometer no-select">
             <Speedometer
               // sizing
-              height={SPEEDOMER_SIZE} width={SPEEDOMER_SIZE} dimensionUnit="%"
+              height={speedometerSize} width={speedometerSize} dimensionUnit="px"
               // Colors
               needleColor="grey" textColor="#fff"
               // Variables
@@ -290,6 +312,7 @@ export function Drive() {
               ]}
               segmentColors={["#414B4F", "#505C61", "#627178", "#6F8087", "#7D9199"]}
               needleTransitionDuration={getNeedleSpeed()} needleTransition={Transition.easeSinInOut}
+              key="speedometer"
             />
 
             {/* <p className="no-select">{getRPMText()}</p> */}
