@@ -5,8 +5,10 @@
 #include <Adafruit_PWMServoDriver.h>
 #include <stdio.h>
 #include <Servo.h>
+#include <IRremote.h>
 
 //#include <ESP8266WiFi.h>
+
 enum Pins {
   EngineD_Steering = 3,
   EngineD_Speed = 2,
@@ -105,9 +107,63 @@ void move_tank(Direction direction, int speed=1000)
 void setup()
 {
   Serial.begin(9600);
+  IrReceiver.begin(7, ENABLE_LED_FEEDBACK);
 }
+
+int tankSpeed = 100;
+Direction action = dir_stop;
 
 void loop()
 {
-  move_tank(dir_forw);
+  if (IrReceiver.decode()) {
+    Serial.print("Decoded IR Code: ");
+    auto ircode = IrReceiver.decodedIRData.decodedRawData;
+    Serial.println(ircode, HEX);
+    IrReceiver.resume();
+    switch (ircode) {
+    case 0xA01000B0: // 1
+      tankSpeed = 100;
+      break;
+    case 0xA11100B0: // 2
+      tankSpeed = 200;
+      break;
+    case 0xA21200B0: // 3
+      tankSpeed = 300;
+      break;
+    case 0xA31300B0: // 4
+      tankSpeed = 400;
+      break;
+    case 0xA41400B0: // 5
+      tankSpeed = 500;
+      break;
+    case 0xA51500B0: // 6
+      tankSpeed = 600;
+      break;
+    case 0xA61600B0: // 7
+      tankSpeed = 700;
+      break;
+    case 0xA71700B0: // 8
+      tankSpeed = 800;
+      break;
+    case 0xA81800B0: // 9
+      tankSpeed = 900;
+      break;
+    case 0x358500B0:
+      action = dir_forw;
+      break;
+    case 0x368600B0:
+      action = dir_back;
+      break;
+    case 0x378700B0:
+      action = dir_r;
+      break;
+    case 0x388800B0:
+      action = dir_l;
+      break;
+    case 0x328200B0:
+      action = dir_stop;
+      break;
+    }
+  }
+  move_tank(action, tankSpeed);
 }
